@@ -20,3 +20,6 @@ Route::get('/', function () {
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware(['auth','verified'])->name('home');
 
+Route::get('/users/create', [App\Http\Controllers\UserController::class, 'create'])->name('users.create');
+Route::post('/users', [App\Http\Controllers\UserController::class, 'store'])->name('users.store');
+Route::get('/users', [App\Http\Controllers\UserController::class, 'index'])->name('users.index');
