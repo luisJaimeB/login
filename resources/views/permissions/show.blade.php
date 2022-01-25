@@ -1,4 +1,4 @@
-@extends('layouts.main', ['activePage' => 'users', 'titlePage' => 'Detalles de Usuario'])
+@extends('layouts.main', ['activePage' => 'permissions', 'titlePage' => 'Detalles del permiso'])
 @section('content')
     <div class="content">
         <div class="content-fluid">
@@ -6,8 +6,8 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header card-header-primary">
-                            <div class="card-title">Usuarios</div>
-                            <p class="card-category">Detalles del usuario {{ $user->name }}</p>
+                            <div class="card-title">Permisos</div>
+                            <p class="card-category">Detalles del permiso {{ $permission->name }}</p>
                         </div>
 
                         <div class="card-body">
@@ -26,19 +26,12 @@
                                             <p class="card-text">
                                                 <div class="author">
                                                     <a href="#" class="d-flex">
-                                                        <img src="{{ asset('/img/faces/defaultAvatar.jpg')}}" alt="image" class="avatar">
-                                                        <h5 class="title mx-3">{{ $user->name }}</h5>
+                                                        {{-- <img src="{{ asset('/img/faces/defaultAvatar.jpg')}}" alt="image" class="avatar"> --}}
+                                                        <h5 class="title mx-3">{{ $permission->name }}</h5>
                                                     </a>
                                                     <p class="description">
-                                                         {{ $user->username }}  <br>
-                                                         {{ $user->email }} <br>
-                                                         {{ $user->created_at }} <br>
-                                                         <br>
-                                                         @forelse ($user->roles as $role)
-                                                             <span class="badge rounded-pill bg-dark text-white">{{ $role->name }}</span>
-                                                         @empty
-                                                             <span class="badge badge-danger bg-danger">No Roles</span>
-                                                         @endforelse
+                                                         {{ $permission->guard_name }} <br>
+                                                         {{ $permission->created_at }} <br>
                                                     </p>
                                                 </div>
                                             </p>
@@ -48,8 +41,9 @@
                                         </div>
                                         <div class="card-footer">
                                             <div class="button-container">
-                                                <a href="{{ route('users.index') }}" class="btn btn-sm btn-success mr-3"> Volver </a>
-                                                <button class="btn btn-sm btn-primary">Editar</button>
+                                                <a href="{{ route('permissions.index') }}" class="btn btn-sm btn-success mr-3"> Volver </a>
+                                                {{-- <button class="btn btn-sm btn-primary">Editar</button> --}}
+                                                <a href="{{ route('permissions.edit', $permission->id) }}" class="btn btn-sm btn-primary mr-3">Editar</a>
                                             </div>
                                         </div>
                                     </div>
