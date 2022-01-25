@@ -15,6 +15,9 @@
                                     @if (session('success'))
                                         <div class="alert alert-success" role="success">
                                             {{ session('success') }}
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                              </button>
                                         </div>    
                                     @endif
                                     <div class="row">
@@ -41,15 +44,19 @@
                                                         <td>{{ $user->username}}</td>
                                                         <td>{{ $user->created_at}}</td>
                                                         <td class="td-actions text-right">
-                                                            <button class="btn btn-info" type="button">
+                                                            <a href="{{ route('users.show', $user->id) }}" class="btn btn-info">
                                                                 <i class="material-icons">person</i>
-                                                            </button>
-                                                            <button class="btn btn-warning" type="button">
+                                                            </a>
+                                                            <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning">
                                                                 <i class="material-icons">edit</i>
-                                                            </button>
-                                                            <button class="btn btn-danger" type="button">
-                                                                <i class="material-icons">close</i>
-                                                            </button>
+                                                            </a>
+                                                            <form action="{{ route('users.delete', $user->id) }}" method="POST" style="display: inline-block;" onsubmit="return confirm('¿Estás seguro? se eliminará el usuario')">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button class="btn btn-danger" type="submit" rel="tooltip">
+                                                                    <i class="material-icons">close</i>
+                                                                </button>
+                                                            </form>
                                                         </td>
                                                     </tr>
                                                 @endforeach
