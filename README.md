@@ -3,7 +3,9 @@
 
 ## Installation 
 Laravel Fortify packages were used for authentication.
+
 composer require laravel/fortify
 
 laravel spatie to manage user permissions and roles in a database.
+
 composer require spatie/laravel-permission
