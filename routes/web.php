@@ -48,8 +48,8 @@ Route::group(['middleware' => ['auth', 'role:Admin']], function(){
         ->name('users.update');
 
     Route::delete('/users/{user}', [UserController::class, 'destroy'])
-        ->name('users.delete')
-        ->middleware('permission:users.delete');
+        ->name('users.destroy')
+        ->middleware('permission:users.destroy');
 
         Route::get('/users/{user}/changeStatusUser', [UserController::class, 'changeStatusUser'])
         ->name('users.change.status');

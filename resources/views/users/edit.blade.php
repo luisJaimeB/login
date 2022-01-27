@@ -34,13 +34,13 @@
                                 <div class="row">
                                     <label for="email" class="col-sm-2 col-form-label">Email</label>
                                     <div class="col-sm-7">
-                                        <input type="email" class="form-control" name="email" value="{{ old('email', $user-> email) }}">
+                                        <input type="email" class="form-control" name="email" value="{{ old('email', $user-> email) }}" readonly>
                                         @if ($errors->has('email'))
                                             <span class="error text-danger" for="input-email">{{ $errors->first('email') }}</span>
                                         @endif
                                     </div>
                                 </div>
-                                <div class="row">
+                                {{-- <div class="row">
                                     <label for="password" class="col-sm-2 col-form-label">Password</label>
                                     <div class="col-sm-7">
                                         <input type="password" class="form-control" name="password" placeholder="Sólo si la quieres cambiar...">
@@ -48,7 +48,7 @@
                                             <span class="error text-danger" for="input-password">{{ $errors->first('password') }}</span>
                                         @endif
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="row">
                                     <label for="name" class="col-sm-2 col-form-label">Roles</label>
                                     <div class="col-sm-7">
