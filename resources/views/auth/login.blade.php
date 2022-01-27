@@ -8,7 +8,7 @@
     </div>
     <div class="col-lg-4 col-md-6 col-sm-8 ml-auto mr-auto">
       <form class="form" method="POST" action="{{ route('login') }}">
-        @csrf
+        @csrf 
 
         <div class="card card-login card-hidden mb-3">
           <div class="card-header card-header-primary text-center">
@@ -26,6 +26,7 @@
             </div>
           </div>
           <div class="card-body">
+            
             <p class="card-description text-center">{{ __(' Come on, enter your credentials ') }} </p>
             {{-- <div class="bmd-form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
               <div class="input-group">
@@ -42,6 +43,14 @@
                 </div>
               @endif
             </div> --}}
+            @if (session('error'))
+                <div class="alert alert-success" role="success">
+                    {{ session('error') }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>    
+            @endif
             <div class="bmd-form-group{{ $errors->has('username') ? ' has-danger' : '' }}">
               <div class="input-group">
                 <div class="input-group-prepend">

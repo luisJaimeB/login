@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\PermissionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,19 +22,40 @@ Route::get('/', function () {
 });
 
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware(['auth','verified'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->middleware(['auth','verified'])->name('home');
 
-Route::group(['middleware' => 'auth'], function(){
-    Route::get('/users/create', [App\Http\Controllers\UserController::class, 'create'])->name('users.create');
-    Route::post('/users', [App\Http\Controllers\UserController::class, 'store'])->name('users.store');
-    Route::get('/users', [App\Http\Controllers\UserController::class, 'index'])->name('users.index');
-    Route::get('/users/{user}', [App\Http\Controllers\UserController::class, 'show'])->name('users.show');
-    Route::get('/users/{user}/edit', [App\Http\Controllers\UserController::class, 'edit'])->name('users.edit');
-    Route::put('/users/{user}', [App\Http\Controllers\UserController::class, 'update'])->name('users.update');
-    Route::delete('/users/{user}', [App\Http\Controllers\UserController::class, 'destroy'])->name('users.delete');        
+Route::group(['middleware' => ['auth', 'role:Admin']], function(){
+    Route::get('/users/create', [UserController::class, 'create'])
+        ->name('users.create')
+        ->middleware('permission:users.create');
 
-    Route::resource('permissions', App\Http\Controllers\PermissionController::class);
-    Route::resource('roles', App\Http\Controllers\RoleController::class);
+    Route::post('/users', [UserController::class, 'store'])
+        ->name('users.store');
+
+    Route::get('/users', [UserController::class, 'index'])
+        ->name('users.index')
+        ->middleware('permission:users.index');
+
+    Route::get('/users/{user}', [UserController::class, 'show'])
+        ->name('users.show')
+        ->middleware('permission:users.show');
+
+    Route::get('/users/{user}/edit', [UserController::class, 'edit'])
+        ->name('users.edit')
+        ->middleware('permission:users.edit');
+
+    Route::put('/users/{user}', [UserController::class, 'update'])
+        ->name('users.update');
+
+    Route::delete('/users/{user}', [UserController::class, 'destroy'])
+        ->name('users.delete')
+        ->middleware('permission:users.delete');
+
+        Route::get('/users/{user}/changeStatusUser', [UserController::class, 'changeStatusUser'])
+        ->name('users.change.status');
+
+    Route::resource('permissions', PermissionController::class);
+    Route::resource('roles', RoleController::class);
 });
 
 

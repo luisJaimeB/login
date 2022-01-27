@@ -41,7 +41,7 @@
           </ul>
         </div>
       </li>
-      @can('user_index')
+      @can('users.index')
       <li class="nav-item{{ $activePage == 'users' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('users.index') }}">
           <i class="material-icons">content_paste</i>
@@ -55,7 +55,7 @@
             <p>{{ __('Typography') }}</p>
         </a>
       </li>
-      @can('permission_index')
+      @can('permissions.index')
       <li class="nav-item{{ $activePage == 'permissions' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('permissions.index') }}">
           <i class="material-icons">bubble_chart</i>
@@ -63,7 +63,7 @@
         </a>
       </li>
       @endcan
-      @can('role_index')
+      @can('roles.index')
       <li class="nav-item{{ $activePage == 'roles' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('roles.index') }}">
           <i class="material-icons">location_ons</i>

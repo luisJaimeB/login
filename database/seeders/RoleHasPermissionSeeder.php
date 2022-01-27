@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Constants\Permissions;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -16,15 +17,23 @@ class RoleHasPermissionSeeder extends Seeder
     public function run()
     {
         // Admin
-        $admin_permissions = Permission::all();
-        Role::findOrFail(1)->permissions()->sync($admin_permissions->pluck('id'));
+        $adminPermissions = Permission::all();
+        Role::findOrFail(1)->permissions()->sync($adminPermissions->pluck('id'));
 
-        // User
-        $user_permissions = $admin_permissions->filter(function($permission) {
+        /* // User
+        $userPermissions = $adminPermissions->filter(function($permission) {
             return substr($permission->name, 0, 5) != 'user_' &&
                 substr($permission->name, 0, 5) != 'role_' &&
                 substr($permission->name, 0, 11) != 'permission_';
         });
-        Role::findOrFail(2)->permissions()->sync($user_permissions);
+        Role::findOrFail(2)->permissions()->sync($userPermissions); */
+
+        //User
+        $roleUser = Role::where('name', 'User')->first();
+
+        foreach (Permissions::permissionToUser() as $permission) {
+            $permission = Permission::where('name', $permission)->first();
+            $roleUser->givePermissionTo($permission);
+        }
     }
 }

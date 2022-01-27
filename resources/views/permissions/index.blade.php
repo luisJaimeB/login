@@ -22,7 +22,7 @@
                                 @endif
                                 <div class="row">
                                     <div class="col-12 text-right">
-                                        @can('permission_create')
+                                        @can('permissions.create')
                                         <a href="{{ route('permissions.create') }}" class="btn btn-sm btn-primary">Crear nuevo permiso</a>
                                         @endcan
                                     </div>
@@ -44,17 +44,17 @@
                                                     <td>{{ $permission->guard_name}}</td>
                                                     <td>{{ $permission->created_at}}</td>
                                                     <td class="td-actions text-right">
-                                                        @can('permission_show')
+                                                        @can('permissions.show')
                                                         <a href="{{ route('permissions.show', $permission->id) }}" class="btn btn-info">
                                                             <i class="material-icons">person</i>
                                                         </a>
                                                         @endcan
-                                                        @can('permission_edit')
+                                                        @can('permissions.edit')
                                                         <a href="{{ route('permissions.edit', $permission->id) }}" class="btn btn-warning">
                                                             <i class="material-icons">edit</i>
                                                         </a>
                                                         @endcan
-                                                        @can('permission_destroy')
+                                                        @can('permissions.destroy')
                                                         <form action="{{ route('permissions.destroy', $permission->id) }}" method="POST" style="display: inline-block;" onsubmit="return confirm('¿Estás seguro? se eliminará el permiso')">
                                                             @csrf
                                                             @method('DELETE')
