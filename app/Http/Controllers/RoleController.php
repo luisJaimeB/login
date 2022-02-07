@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RoleCreateRequest;
+use App\Http\Requests\RoleEditRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Spatie\Permission\Models\Permission;
@@ -20,7 +22,7 @@ class RoleController extends Controller
         
         $roles = Role::paginate(5);
 
-        return view('roles.index', compact('roles'));
+        return view('admin.roles.index', compact('roles'));
     }
 
     /**
@@ -34,7 +36,7 @@ class RoleController extends Controller
 
         $permissions = Permission::all()->pluck('name', 'id');
 
-        return view('roles.create', compact('permissions'));
+        return view('admin.roles.create', compact('permissions'));
     }
 
     /**
@@ -43,7 +45,7 @@ class RoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RoleCreateRequest $request)
     {
         $role = Role::create($request->only('name'));
 
@@ -63,7 +65,7 @@ class RoleController extends Controller
         abort_if(Gate::denies('roles.show'), 403);
 
         $role->load('permissions');
-        return view('roles.show', compact('role'));
+        return view('admin.roles.show', compact('role'));
     }
 
     /**
@@ -79,7 +81,7 @@ class RoleController extends Controller
         $permissions = Permission::all()->pluck('name', 'id');
         $role->load('permissions');
         
-        return view('roles.edit', compact('role', 'permissions'));
+        return view('admin.roles.edit', compact('role', 'permissions'));
     }
 
     /**
@@ -89,7 +91,7 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Role $role)
+    public function update(RoleEditRequest $request, Role $role)
     {
         $role->update($request->only('name'));
 

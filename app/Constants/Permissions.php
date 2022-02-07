@@ -18,8 +18,15 @@ class Permissions
     public const USERS_DESTROY = 'users.destroy';
 
     public const PRODUCTS_INDEX = 'products.index';
-    public const PRODUCTS_CREATE = 'products.create';
+    public const PRODUCTS_SHOW = 'products.show';
 
+    public const ADMIN_CATEGORIES_INDEX = 'admin.categories.index';
+
+    public const ADMIN_PRODUCTS_INDEX = 'admin.products.index';
+    public const ADMIN_PRODUCTS_CREATE = 'admin.products.create';
+    public const ADMIN_PRODUCTS_SHOW = 'admin.products.show';
+    public const ADMIN_PRODUCTS_EDIT = 'admin.products.edit';
+    public const ADMIN_PRODUCTS_DESTROY = 'admin.products.destroy';
     
     public static function toArray(): array
     {
@@ -34,8 +41,15 @@ class Permissions
             self::USERS_SHOW,
             self::USERS_EDIT,
             self::USERS_DESTROY,
+            self::ADMIN_CATEGORIES_INDEX,
             self::PRODUCTS_INDEX,
-            self::PRODUCTS_CREATE
+            self::PRODUCTS_SHOW,
+            self::ADMIN_PRODUCTS_INDEX,
+            self::ADMIN_PRODUCTS_CREATE,
+            self::ADMIN_PRODUCTS_SHOW,
+            self::ADMIN_PRODUCTS_EDIT,
+            self::ADMIN_PRODUCTS_DESTROY,
+            
         ];
 
     }
@@ -44,7 +58,7 @@ class Permissions
     {
         return [
             self::PRODUCTS_INDEX,
-            self::PRODUCTS_CREATE
+            self::PRODUCTS_SHOW
         ];
     }
 

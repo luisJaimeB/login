@@ -32,27 +32,29 @@
                 <span class="sidebar-normal">{{ __('User profile') }} </span>
               </a>
             </li>
-            <li class="nav-item{{ $activePage == 'user-management' ? ' active' : '' }}">
-              <a class="nav-link" href="#">
-                <span class="sidebar-mini"> UM </span>
-                <span class="sidebar-normal"> {{ __('User Management') }} </span>
+            @can('admin.products.index')
+            <li class="nav-item{{ $activePage == 'product-management' ? ' active' : '' }}">
+              <a class="nav-link" href="{{ route('admin.products.index') }}">
+                <span class="sidebar-mini"> PM </span>
+                <span class="sidebar-normal"> {{ __('Product Management') }} </span>
               </a>
             </li>
+            @endcan
           </ul>
         </div>
       </li>
       @can('users.index')
       <li class="nav-item{{ $activePage == 'users' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('users.index') }}">
-          <i class="material-icons">content_paste</i>
+          <i class="material-icons">people</i>
             <p>{{ __('Usuarios') }}</p>
         </a>
       </li>
       @endcan
-      <li class="nav-item{{ $activePage == 'typography' ? ' active' : '' }}">
-        <a class="nav-link" href="#">
-          <i class="material-icons">library_books</i>
-            <p>{{ __('Typography') }}</p>
+      <li class="nav-item{{ $activePage == 'products' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('products.index') }}">
+          <i class="material-icons">storefront</i>
+            <p>{{ __('Products') }}</p>
         </a>
       </li>
       @can('permissions.index')
@@ -71,12 +73,14 @@
         </a>
       </li>
       @endcan
-      <li class="nav-item{{ $activePage == 'notifications' ? ' active' : '' }}">
-        <a class="nav-link" href="#">
-          <i class="material-icons">notifications</i>
-          <p>{{ __('Notifications') }}</p>
+      @can('admin.categories.index')
+      <li class="nav-item{{ $activePage == 'categories' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('admin.categories.index') }}">
+          <i class="material-icons">category</i>
+          <p>{{ __('Categories') }}</p>
         </a>
       </li>
+      @endcan
       <li class="nav-item{{ $activePage == 'language' ? ' active' : '' }}">
         <a class="nav-link" href="#">
           <i class="material-icons">language</i>
