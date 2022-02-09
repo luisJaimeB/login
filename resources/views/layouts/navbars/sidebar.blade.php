@@ -32,45 +32,55 @@
                 <span class="sidebar-normal">{{ __('User profile') }} </span>
               </a>
             </li>
-            <li class="nav-item{{ $activePage == 'user-management' ? ' active' : '' }}">
-              <a class="nav-link" href="#">
-                <span class="sidebar-mini"> UM </span>
-                <span class="sidebar-normal"> {{ __('User Management') }} </span>
+            @can('admin.products.index')
+            <li class="nav-item{{ $activePage == 'product-management' ? ' active' : '' }}">
+              <a class="nav-link" href="{{ route('admin.products.index') }}">
+                <span class="sidebar-mini"> PM </span>
+                <span class="sidebar-normal"> {{ __('Product Management') }} </span>
               </a>
             </li>
+            @endcan
           </ul>
         </div>
       </li>
+      @can('users.index')
       <li class="nav-item{{ $activePage == 'users' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('users.index') }}">
-          <i class="material-icons">content_paste</i>
+          <i class="material-icons">people</i>
             <p>{{ __('Usuarios') }}</p>
         </a>
       </li>
-      <li class="nav-item{{ $activePage == 'typography' ? ' active' : '' }}">
-        <a class="nav-link" href="#">
-          <i class="material-icons">library_books</i>
-            <p>{{ __('Typography') }}</p>
+      @endcan
+      <li class="nav-item{{ $activePage == 'products' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('products.index') }}">
+          <i class="material-icons">storefront</i>
+            <p>{{ __('Products') }}</p>
         </a>
       </li>
-      <li class="nav-item{{ $activePage == 'icons' ? ' active' : '' }}">
-        <a class="nav-link" href="#">
+      @can('permissions.index')
+      <li class="nav-item{{ $activePage == 'permissions' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('permissions.index') }}">
           <i class="material-icons">bubble_chart</i>
-          <p>{{ __('Icons') }}</p>
+          <p>{{ __('Permissions') }}</p>
         </a>
       </li>
-      <li class="nav-item{{ $activePage == 'map' ? ' active' : '' }}">
-        <a class="nav-link" href="#">
+      @endcan
+      @can('roles.index')
+      <li class="nav-item{{ $activePage == 'roles' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('roles.index') }}">
           <i class="material-icons">location_ons</i>
-            <p>{{ __('Maps') }}</p>
+            <p>{{ __('Roles') }}</p>
         </a>
       </li>
-      <li class="nav-item{{ $activePage == 'notifications' ? ' active' : '' }}">
-        <a class="nav-link" href="#">
-          <i class="material-icons">notifications</i>
-          <p>{{ __('Notifications') }}</p>
+      @endcan
+      @can('admin.categories.index')
+      <li class="nav-item{{ $activePage == 'categories' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('admin.categories.index') }}">
+          <i class="material-icons">category</i>
+          <p>{{ __('Categories') }}</p>
         </a>
       </li>
+      @endcan
       <li class="nav-item{{ $activePage == 'language' ? ' active' : '' }}">
         <a class="nav-link" href="#">
           <i class="material-icons">language</i>
