@@ -31,7 +31,7 @@
                                         <div class="row justify-content-center">
                                             @foreach ($chunk as $product)
                                                 <div class="card mr-5" style="width: 25rem;">
-                                                    <img class="card-img-top" src="{{ route('images.show', ['image' => $product->image->path]) }}" alt="Card image cap" width="350">
+                                                    <img class="card-img-top" src="{{ $product->image->path_url }}" alt="Card image cap" width="350">
                                                     <div class="card-body">
                                                         <p class="card-text">{{$product->name}}</p>
                                                         <p class="card-text">{{$product->description}}</p>

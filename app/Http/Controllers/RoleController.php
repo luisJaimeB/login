@@ -4,33 +4,26 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\RoleCreateRequest;
 use App\Http\Requests\RoleEditRequest;
-use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\View\View;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    
+    public function index(): View
     {
         abort_if(Gate::denies('roles.index'), 403);
-        
+
         $roles = Role::paginate(5);
 
         return view('admin.roles.index', compact('roles'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    
+    public function create(): View
     {
         abort_if(Gate::denies('roles.create'), 403);
 
@@ -39,13 +32,8 @@ class RoleController extends Controller
         return view('admin.roles.create', compact('permissions'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(RoleCreateRequest $request)
+    
+    public function store(RoleCreateRequest $request): RedirectResponse
     {
         $role = Role::create($request->only('name'));
 
@@ -54,13 +42,8 @@ class RoleController extends Controller
         return redirect()->route('roles.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Role $role)
+    
+    public function show(Role $role): View
     {
         abort_if(Gate::denies('roles.show'), 403);
 
@@ -68,30 +51,19 @@ class RoleController extends Controller
         return view('admin.roles.show', compact('role'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Role $role)
+    
+    public function edit(Role $role): View
     {
         abort_if(Gate::denies('roles.edit'), 403);
 
         $permissions = Permission::all()->pluck('name', 'id');
         $role->load('permissions');
-        
+
         return view('admin.roles.edit', compact('role', 'permissions'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(RoleEditRequest $request, Role $role)
+    
+    public function update(RoleEditRequest $request, Role $role): RedirectResponse
     {
         $role->update($request->only('name'));
 
@@ -100,13 +72,8 @@ class RoleController extends Controller
         return redirect()->route('roles.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Role $role)
+    
+    public function destroy(Role $role): RedirectResponse
     {
         abort_if(Gate::denies('roles.destroy'), 403);
 

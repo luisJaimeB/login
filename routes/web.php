@@ -28,19 +28,6 @@ Route::prefix('admin')
         require_once __DIR__ . '/admin/products.php';
         require_once __DIR__ . '/admin/categories.php';
     });
-
-Route::get('/images/{image}', function (string $image) {
-    if (!Storage::disk('public')->exists($image)) {
-        abort(404);
-    }
-    $path = Storage::disk('public')->path($image);
-    $file = File::get($path);
-    $type = File::mimeType($path);
-    $data = Response::make($file, 200);
-    $data->header("Content-Type", $type); 
-
-    return $data;
-})->name('images.show');
     
 Route::get('/', function () {
     return view('welcome');
