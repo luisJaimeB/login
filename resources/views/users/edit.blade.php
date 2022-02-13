@@ -9,12 +9,12 @@
                         @method('PUT')
                         <div class="card">
                             <div class="card-header card-header-primary">
-                                <h4 class="card-title">Usuario</h4>
-                                <p class="card-category">Editar datos</p>
+                                <h4 class="card-title">@lang('users.titles.users')</h4>
+                                <p class="card-category">@lang('users.titles.editData')</p>
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <label for="name" class="col-sm-2 col-form-label">Nombre</label>
+                                    <label for="name" class="col-sm-2 col-form-label">@lang('users.fields.name.label')</label>
                                     <div class="col-sm-7">
                                         <input type="text" class="form-control" name="name" value="{{ old('name', $user-> name) }}" autofocus>
                                         @if ($errors->has('name'))
@@ -23,7 +23,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <label for="username" class="col-sm-2 col-form-label">Nombre de usuario</label>
+                                    <label for="username" class="col-sm-2 col-form-label">@lang('users.fields.username.label')</label>
                                     <div class="col-sm-7">
                                         <input type="text" class="form-control" name="username" value="{{ old('username', $user-> username) }}">
                                         @if ($errors->has('username'))
@@ -32,7 +32,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <label for="email" class="col-sm-2 col-form-label">Email</label>
+                                    <label for="email" class="col-sm-2 col-form-label">@lang('users.fields.email.label')</label>
                                     <div class="col-sm-7">
                                         <input type="email" class="form-control" name="email" value="{{ old('email', $user-> email) }}" readonly>
                                         @if ($errors->has('email'))
@@ -40,17 +40,8 @@
                                         @endif
                                     </div>
                                 </div>
-                                {{-- <div class="row">
-                                    <label for="password" class="col-sm-2 col-form-label">Password</label>
-                                    <div class="col-sm-7">
-                                        <input type="password" class="form-control" name="password" placeholder="Sólo si la quieres cambiar...">
-                                        @if ($errors->has('password'))
-                                            <span class="error text-danger" for="input-password">{{ $errors->first('password') }}</span>
-                                        @endif
-                                    </div>
-                                </div> --}}
                                 <div class="row">
-                                    <label for="name" class="col-sm-2 col-form-label">Roles</label>
+                                    <label for="name" class="col-sm-2 col-form-label">@lang('roles.titles.roles')</label>
                                     <div class="col-sm-7">
                                         <div class="form-group">
                                             <div class="tab-content">
@@ -86,8 +77,8 @@
                                 </div>
                             </div>
                             <div class="card-footer ml-auto mr-auto">
-                                <button type="submit" class="btn btn-primary">Actualizar</button>
-                                <a href="{{ route('users.index') }}" class="btn btn-success mr-3"> Cancelar </a>
+                                <button type="submit" class="btn btn-primary">@lang('common.update')</button>
+                                <a href="{{ route('users.index') }}" class="btn btn-success mr-3">@lang('common.cancel')</a>
                             </div>
                         </div>
                     </form>

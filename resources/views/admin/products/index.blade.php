@@ -8,8 +8,8 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header card-header-primary">
-                                    <div class="card-title"><strong>Productos</strong></div>
-                                    <div class="card-category">Productos en Stock</div>
+                                    <div class="card-title"><strong>@lang('products.titles.products')</strong></div>
+                                    <div class="card-category">@lang('products.titles.stock')</div>
                                 </div>
                                 <div class="card-body bg-light">
                                     @if (session('success'))
@@ -23,7 +23,7 @@
                                     <div class="row">
                                         <div class="col-12 text-right">
                                             @can('admin.products.create')
-                                            <a href="{{ route('admin.products.create') }}" class="btn btn-sm btn-primary">Crear Producto</a>
+                                            <a href="{{ route('admin.products.create') }}" class="btn btn-sm btn-primary">@lang('products.productsCreate')</a>
                                             @endcan
                                         </div>
                                     </div>
@@ -45,7 +45,7 @@
                                                                 <a href="{{ route('admin.products.edit', $product->id) }}" class="btn btn-warning">
                                                                     <i class="material-icons">edit</i>
                                                                 </a>
-                                                                <form action="{{ route('admin.products.destroy', $product->id) }}" method="POST" style="display: inline-block;" onsubmit="return confirm('¿Estás seguro? se eliminará el producto')">
+                                                                <form action="{{ route('admin.products.destroy', $product->id) }}" method="POST" style="display: inline-block;" onsubmit="return confirm('@lang('products.messages.comfirmDelProduct')')">
                                                                     @csrf
                                                                     @method('DELETE')
                                                                     <button class="btn btn-danger" type="submit" rel="tooltip">

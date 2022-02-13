@@ -54,7 +54,7 @@
       <li class="nav-item{{ $activePage == 'products' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('products.index') }}">
           <i class="material-icons">storefront</i>
-            <p>{{ __('Products') }}</p>
+            <p>@lang('products.products')</p>
         </a>
       </li>
       @can('permissions.index')
@@ -87,11 +87,6 @@
           <p>{{ __('RTL Support') }}</p>
         </a>
       </li>
-      {{-- <li class="nav-item active-pro{{ $activePage == 'upgrade' ? ' active' : '' }}">
-        <a class="nav-link text-white bg-danger" href="#">
-          <i class="material-icons text-white">unarchive</i>
-          <p>{{ __('Upgrade to PRO') }}</p>
-        </a>
       </li> --}}
     </ul>
   </div>

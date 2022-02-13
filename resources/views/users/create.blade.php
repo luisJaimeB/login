@@ -8,57 +8,48 @@
                         @csrf
                         <div class="card">
                             <div class="card-header card-header-primary">
-                                <h4 class="card-title">Usuario</h4>
-                                <p class="card-category">Ingresar datos</p>
+                                <h4 class="card-title">@lang('users.titles.users')</h4>
+                                <p class="card-category">@lang('users.titles.enterData')</p>
                             </div>
                             <div class="card-body">
-                                {{-- @if ($errors->any())
-                                    <div class="alert alert-danger">
-                                        <ul>
-                                            @foreach ($errors->all() as $error)
-                                                <li>{{ $error }}</li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                @endif --}}
                                 <div class="row">
-                                    <label for="name" class="col-sm-2 col-form-label">Nombre</label>
+                                    <label for="name" class="col-sm-2 col-form-label">@lang('users.fields.name.label')</label>
                                     <div class="col-sm-7">
-                                        <input type="text" class="form-control" name="name" placeholder="Ingresa tu nombre" value="{{ old('name') }}" autofocus>
+                                        <input type="text" class="form-control" name="name" placeholder="@lang('users.fields.name.placeholder')" value="{{ old('name') }}" autofocus>
                                         @if ($errors->has('name'))
                                             <span class="error text-danger" for="input-name">{{ $errors->first('name') }}</span>
                                         @endif
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <label for="username" class="col-sm-2 col-form-label">Nombre de usuario</label>
+                                    <label for="username" class="col-sm-2 col-form-label">@lang('users.fields.username.label')</label>
                                     <div class="col-sm-7">
-                                        <input type="text" class="form-control" name="username" placeholder="Ingresa tu nombre de usuario" value="{{ old('username') }}">
+                                        <input type="text" class="form-control" name="username" placeholder="@lang('users.fields.username.placeholder')" value="{{ old('username') }}">
                                         @if ($errors->has('username'))
                                             <span class="error text-danger" for="input-username">{{ $errors->first('username') }}</span>
                                         @endif
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <label for="email" class="col-sm-2 col-form-label">Email</label>
+                                    <label for="email" class="col-sm-2 col-form-label">@lang('users.fields.email.label')</label>
                                     <div class="col-sm-7">
-                                        <input type="email" class="form-control" name="email" placeholder="Ingresa tu email" value="{{ old('email') }}">
+                                        <input type="email" class="form-control" name="email" placeholder="@lang('users.fields.email.placeholder')" value="{{ old('email') }}">
                                         @if ($errors->has('email'))
                                             <span class="error text-danger" for="input-email">{{ $errors->first('email') }}</span>
                                         @endif
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <label for="password" class="col-sm-2 col-form-label">Password</label>
+                                    <label for="password" class="col-sm-2 col-form-label">@lang('users.fields.password.label')</label>
                                     <div class="col-sm-7">
-                                        <input type="password" class="form-control" name="password" placeholder="Ingresa tu contraseña">
+                                        <input type="password" class="form-control" name="password" placeholder="@lang('users.fields.password.placeholder')">
                                         @if ($errors->has('password'))
                                             <span class="error text-danger" for="input-password">{{ $errors->first('password') }}</span>
                                         @endif
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <label for="roles" class="col-sm-2 col-form-label">Roles</label>
+                                    <label for="roles" class="col-sm-2 col-form-label">@lang('roles.titles.roles')</label>
                                     <div class="col-sm-7">
                                         <div class="form-group">
                                             <div class="tab-content">
@@ -93,8 +84,8 @@
                                 </div>
                             </div>
                             <div class="card-footer ml-auto mr-auto">
-                                <button type="submit" class="btn btn-primary">Guardar</button>
-                                <a href="{{ route('users.index') }}" class="btn btn-success mr-3"> Volver </a>
+                                <button type="submit" class="btn btn-primary">@lang('common.save')</button>
+                                <a href="{{ route('users.index') }}" class="btn btn-success mr-3">@lang('common.return')</a>
                             </div>
                         </div>
                     </form>

@@ -6,8 +6,8 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header card-header-primary">
-                            <div class="card-title">Productos</div>
-                            <p class="card-category">Detalles del Producto <strong>{{ $product->name }}</strong></p>
+                            <div class="card-title">@lang('products.titles.products')</div>
+                            <p class="card-category">@lang('products.titles.detailProd')<strong>{{ $product->name }}</strong></p>
                         </div>
 
                         <div class="card-body">
@@ -27,7 +27,7 @@
                                                 <div class="author">
                                                     <a href="#" class="">
                                                         <h5 class="title mx-3">{{ $product->name }}</h5>
-                                                        <img class="card-img-top" src="{{ route('images.show', ['image' => $product->image->path]) }}" alt="Card image cap">
+                                                        <img class="card-img-top" src="{{ $product->image->path_url }}" alt="Card image cap">
                                                         
                                                     </a>
                                                     <p class="description">
@@ -36,8 +36,8 @@
                                                             <div class="table-responsive">
                                                                 <table class="table">
                                                                     <thead class="text-primary text-center">
-                                                                        <th>Categoría</th>
-                                                                        <th>Fecha de publicación</th>
+                                                                        <th>@lang('products.fields.categories.th')</th>
+                                                                        <th>@lang('products.fields.publicationDate')</th>
                                                                     </thead>
                                                                     <tbody class="text-primary text-center">
                                                                             <tr>
@@ -48,7 +48,7 @@
                                                                 </table>
                                                             </div>
                                                         </div> 
-                                                        <label for="description">Descripción</label><br>
+                                                        <label for="description">@lang('products.fields.description.label')</label><br>
                                                         <p>{{ $product->description }}</p><br>          
                                                     </p>
                                                 </div>
@@ -56,8 +56,8 @@
                                         </div>
                                         <div class="card-footer d-flex justify-content-center">
                                             <div class="button-container">
-                                                <a href="{{ route('admin.products.index') }}" class="btn btn-sm btn-success mr-3"> Volver </a>
-                                                <a href="{{ route('admin.products.edit', $product->id) }}" class="btn btn-sm btn-primary mr-3">Editar</a>
+                                                <a href="{{ route('admin.products.index') }}" class="btn btn-sm btn-success mr-3">@lang('common.return')</a>
+                                                <a href="{{ route('admin.products.edit', $product->id) }}" class="btn btn-sm btn-primary mr-3">@lang('common.edit')</a>
                                             </div>
                                         </div>
                                     </div>

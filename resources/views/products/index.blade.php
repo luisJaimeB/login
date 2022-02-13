@@ -8,8 +8,8 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header card-header-primary">
-                                    <div class="card-title"><strong>Productos</strong></div>
-                                    <div class="card-category">Productos en Stock</div>
+                                    <div class="card-title"><strong>@lang('products.products')</strong></div>
+                                    <div class="card-category">@lang('products.stock')</div>
                                 </div>
                                 <div class="card-body">
                                     @if (session('success'))
@@ -20,13 +20,6 @@
                                               </button>
                                         </div>    
                                     @endif
-                                    <div class="row">
-                                        <div class="col-12 text-right">
-                                            @can('products.create')
-                                            <a href="{{ route('products.create') }}" class="btn btn-sm btn-primary">Crear Producto</a>
-                                            @endcan
-                                        </div>
-                                    </div>
                                     @foreach ($products->chunk(3) as $chunk)
                                         <div class="row justify-content-center">
                                             @foreach ($chunk as $product)

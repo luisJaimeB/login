@@ -6,8 +6,8 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header card-header-primary">
-                            <div class="card-title">Usuarios</div>
-                            <p class="card-category">Detalles del usuario {{ $user->name }}</p>
+                            <div class="card-title">@lang('users.titles.users')</div>
+                            <p class="card-category">@lang('users.titles.detailUser') {{ $user->name }}</p>
                         </div>
 
                         <div class="card-body">
@@ -37,7 +37,7 @@
                                                          @forelse ($user->roles as $role)
                                                              <span class="badge rounded-pill bg-dark text-white">{{ $role->name }}</span>
                                                          @empty
-                                                             <span class="badge badge-danger bg-danger">No Roles</span>
+                                                             <span class="badge badge-danger bg-danger">@lang('roles.messages.Norole')</span>
                                                          @endforelse
                                                     </p>
                                                 </div>
@@ -48,8 +48,8 @@
                                         </div>
                                         <div class="card-footer">
                                             <div class="button-container">
-                                                <a href="{{ route('users.index') }}" class="btn btn-sm btn-success mr-3"> Volver </a>
-                                                <button class="btn btn-sm btn-primary">Editar</button>
+                                                <a href="{{ route('users.index') }}" class="btn btn-sm btn-success mr-3">@lang('common.return')</a>
+                                                <button class="btn btn-sm btn-primary">@lang('common.edit')</button>
                                             </div>
                                         </div>
                                     </div>
