@@ -28,7 +28,7 @@ Route::prefix('admin')
         require_once __DIR__ . '/admin/products.php';
         require_once __DIR__ . '/admin/categories.php';
     });
-    
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -36,8 +36,7 @@ Route::get('/', function () {
 
 Route::get('/home', [HomeController::class, 'index'])->middleware(['auth','verified'])->name('home');
 
-Route::group(['middleware' => ['auth', 'role:Admin']], function(){
-
+Route::group(['middleware' => ['auth', 'role:Admin', 'verified']], function () {
     Route::get('/users/create', [UserController::class, 'create'])
         ->name('users.create')
         ->middleware('permission:users.create');
@@ -67,8 +66,7 @@ Route::group(['middleware' => ['auth', 'role:Admin']], function(){
     Route::get('/users/{user}/changeStatusUser', [UserController::class, 'changeStatusUser'])
         ->name('users.change.status');
 
-        
-    
+
     Route::get('/roles/create', [RoleController::class, 'create'])
         ->name('roles.create')
         ->middleware('permission:roles.create');
@@ -96,16 +94,12 @@ Route::group(['middleware' => ['auth', 'role:Admin']], function(){
         ->middleware('permission:roles.destroy');
 
     Route::resource('permissions', PermissionController::class);
-    //Route::resource('admin.roles', RoleController::class);
-
 });
 
-Route::group(['middleware' => 'auth'], function(){
+Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/products', [ProductController::class, 'index'])
         ->name('products.index');
 
     Route::get('/products/{product}', [ProductController::class, 'show'])
         ->name('products.show');
 });
-
-

@@ -20,8 +20,6 @@ class ProductSeeder extends Seeder
                 Image::factory()->create([
                     'product_id' => $product->id
                 ]);
-
-                //dd($ddfacrory);
             });
     }
 }

@@ -35,7 +35,7 @@
                                                 <th>@lang('users.fields.email.th')</th>
                                                 <th>@lang('users.fields.username.th')</th>
                                                 <th>@lang('roles.th.role')</th>
-                                                <th>@lang('users.fields.status')</th>
+                                                <th>@lang('users.fields.status.status')</th>
                                                 <th class="text-right">@lang('common.actions')</th>
                                             </thead>
                                             <tbody>

@@ -54,7 +54,7 @@
       <li class="nav-item{{ $activePage == 'products' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('products.index') }}">
           <i class="material-icons">storefront</i>
-            <p>@lang('products.products')</p>
+            <p>@lang('products.titles.products')</p>
         </a>
       </li>
       @can('permissions.index')
@@ -69,7 +69,7 @@
       <li class="nav-item{{ $activePage == 'roles' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('roles.index') }}">
           <i class="material-icons">location_ons</i>
-            <p>{{ __('Roles') }}</p>
+            <p>@lang('roles.titles.roles')</p>
         </a>
       </li>
       @endcan
@@ -77,17 +77,17 @@
       <li class="nav-item{{ $activePage == 'categories' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('admin.categories.index') }}">
           <i class="material-icons">category</i>
-          <p>{{ __('Categories') }}</p>
+          <p>@lang('products.fields.categories.label')</p>
         </a>
       </li>
       @endcan
       <li class="nav-item{{ $activePage == 'language' ? ' active' : '' }}">
         <a class="nav-link" href="#">
           <i class="material-icons">language</i>
-          <p>{{ __('RTL Support') }}</p>
+          <p></p>
         </a>
       </li>
-      </li> --}}
+      </li>
     </ul>
   </div>
 </div>
