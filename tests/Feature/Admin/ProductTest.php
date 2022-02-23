@@ -122,27 +122,4 @@ class ProductTest extends TestCase
         ->assertViewIs('admin.products.show')
         ->assertViewHas('product', $product);
      }
-
-    /** @test */
-    public function authorized_user_can_be_deleted_a_product ()
-    {
-        $this->withoutExceptionHandling();
-        $this->seed([RoleSeeder::class, PermissionSeeder::class]);
-
-        /** @var \App\Models\Product $product */
-        $product = Product::factory()->create();
-        Image::factory()->create([
-            'product_id' => $product->id
-        ]);
-
-        /** @var \App\Models\User $user */
-        $user = User::factory()->enabled()->create();
-        $user->assignRole('Admin');
-        $user->givePermissionTo('admin.products.destroy');
-
-        $response = $this->actingAs($user)->delete(route('admin.products.destroy', $product));
-
-        $response->dumpSession()->assertRedirect(route('admin.products.index'));
-            $this->assertDatabaseMissing('product', $product[]);
-    }
 }

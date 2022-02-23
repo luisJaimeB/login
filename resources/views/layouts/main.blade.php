@@ -31,7 +31,7 @@
         <div class="fixed-plugin">
           <div class="dropdown show-dropdown">
             <a href="#" data-toggle="dropdown">
-              <i class="fa fa-cog fa-2x"> </i>
+              <i class="fas fa-2x fa-cart-arrow-down" style="color: rgb(245, 67, 67)"></i>
             </a>
             <ul class="dropdown-menu">
               <li class="header-title"> Sidebar Filters</li>
