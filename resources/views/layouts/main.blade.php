@@ -18,6 +18,7 @@
     <!-- CSS Just for demo purpose, don't include it in your project -->
     </head>
     <body class="{{ $class ?? '' }}">
+      <div id="app">
         @auth()
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
@@ -30,8 +31,8 @@
         @if (auth()->check())
         <div class="fixed-plugin">
           <div class="dropdown show-dropdown">
-            <a href="#" data-toggle="dropdown">
-              <i class="fas fa-2x fa-cart-arrow-down" style="color: rgb(245, 67, 67)"></i>
+            <a href="{{ route('cart.index') }}">
+              <i class="fas fa-2x fa-cart-arrow-down" style="color: rgb(135, 67, 245)"></i>
             </a>
             <ul class="dropdown-menu">
               <li class="header-title"> Sidebar Filters</li>
@@ -102,11 +103,47 @@
           </div>
         </div>
         @endif
+      </div>
+        <script src="{{ asset('js/app.js') }}"></script>
         <!--   Core JS Files   -->
         <script src="{{ asset('/js/core/jquery.min.js') }}"></script>
         <script src="{{ asset('/js/core/popper.min.js') }}"></script>
         <script src="{{ asset('/js/core/bootstrap-material-design.min.js') }}"></script>
         <script src="{{ asset('/js/plugins/perfect-scrollbar.jquery.min.js') }}"></script>
         @stack('js')
+        <script src="https://www.paypal.com/sdk/js?client-id=AYsJYvXbOx_0f-Y8LHigM1jxIQ7CMOOe-DiqYi8djeXGAIpfjJ2wkZcIaJt9vSh4NFST221r0-XAXvvj&currency=USD"></script>
+
+        <script>
+            paypal.Buttons({
+
+              // Sets up the transaction when a payment button is clicked
+              createOrder: function(data, actions) {
+                return actions.order.create({
+                  purchase_units: [{
+                    amount: {
+                      value: '77.44' // Can reference variables or functions. Example: `value: document.getElementById('...').value`
+                    }
+                  }]
+                });
+              },
+
+              // Finalize the transaction after payer approval
+              onApprove: function(data, actions) {
+                return actions.order.capture().then(function(orderData) {
+                  // Successful capture! For dev/demo purposes:
+                      console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+                      var transaction = orderData.purchase_units[0].payments.captures[0];
+                      alert('Transaction '+ transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');
+
+                  // When ready to go live, remove the alert and show a success message within this page. For example:
+                  // var element = document.getElementById('paypal-button-container');
+                  // element.innerHTML = '';
+                  // element.innerHTML = '<h3>Thank you for your payment!</h3>';
+                  // Or go to another URL:  actions.redirect('thank_you.html');
+                });
+              }
+            }).render('#paypal-button-container');
+
+          </script>
     </body>
 </html>

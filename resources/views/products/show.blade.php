@@ -1,4 +1,4 @@
-@extends('layouts.main', ['activePage' => 'products', 'titlePage' => 'Detalles de Producto'])
+@extends('layouts.main', ['activePage' => 'product', 'titlePage' => 'Detalles de Producto'])
 @section('content')
     <div class="content">
         <div class="content-fluid">
@@ -57,6 +57,7 @@
                                         <div class="card-footer d-flex justify-content-center">
                                             <div class="button-container">
                                                 <a href="{{ route('products.index') }}" class="btn btn-sm btn-success mr-3">@lang('common.return')</a>
+                                                <button type="button" class="btn btn-sm btn-primary">@lang('common.addtocart')</button>
                                             </div>
                                         </div>
                                     </div>

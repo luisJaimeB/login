@@ -8,4 +8,6 @@ return [
     'update' => 'Update',
     'cancel' => 'Cancel',
     'actions' => 'Actions',
+    'addtocart' => 'Add to cart',
+    'emptyCart' => 'Empty cart',
 ];

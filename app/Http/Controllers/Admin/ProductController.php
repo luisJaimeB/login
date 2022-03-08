@@ -38,7 +38,7 @@ class ProductController extends Controller
 
     public function store(ProductCreateRequest $request): RedirectResponse
     {
-        $product = Product::create($request->only('name', 'description', 'price', 'category_id'));
+        $product = Product::create($request->only('name', 'description', 'price', 'category_id', 'quantity'));
 
         if ($request->hasFile('image')) {
             $file = $request->file('image');
@@ -70,7 +70,7 @@ class ProductController extends Controller
 
     public function update(ProductEditRequest $request, Product $product): RedirectResponse
     {
-        $data = $request->only('name', 'description', 'price', 'category_id');
+        $data = $request->only('name', 'description', 'price', 'category_id', 'quantity');
 
         $product->load('images');
         $image = $product->images->first();

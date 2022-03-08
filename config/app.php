@@ -179,6 +179,7 @@ return [
         App\Providers\FortifyServiceProvider::class,
         App\Providers\ComposerServiceProvider::class,
         Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
+        //App\Providers\ShoppingCartProvider::class,
     ],
 
     /*

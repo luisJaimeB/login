@@ -3,13 +3,12 @@
 use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProductController;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Response;
-use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\ShoppingCartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -102,4 +101,13 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     Route::get('/products/{product}', [ProductController::class, 'show'])
         ->name('products.show');
+    
+    Route::get('checkout', [ShoppingCartController::class, 'index'])
+        ->name('cart.index');
+
+    Route::post('checkout', [ShoppingCartController::class, 'store'])
+        ->name('cart.store');
+    
+    Route::delete('checkout', [ShoppingCartController::class, 'destroy'])
+        ->name('cart.destroy');
 });

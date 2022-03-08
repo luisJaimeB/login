@@ -2,14 +2,15 @@
 @section('content')
     <div class="content">
         <div class="container-fluid">
+            {{-- <product-index :products='@json($products)'></product-index> --}}
             <div class="row">
                 <div class="col-md-12">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header card-header-primary">
-                                    <div class="card-title"><strong>@lang('products.products')</strong></div>
-                                    <div class="card-category">@lang('products.stock')</div>
+                                    <div class="card-title"><strong>@lang('products.titles.products')</strong></div>
+                                    <div class="card-category">@lang('products.titles.stock')</div>
                                 </div>
                                 <div class="card-body">
                                     @if (session('success'))
@@ -30,15 +31,28 @@
                                                         <p class="card-text">{{$product->description}}</p>
                                                         <p class="card-text"><strong>$ {{$product->price}}</strong></p>
                                                         <p><span class="badge badge-info">{{ $product->category->name }}</span></p>
-                                                        <div class="row">
-                                                            <div class="col-6 jutify-content-right">
-                                                                <a href="{{ route('products.show', $product->id) }}" class="btn btn-info">
-                                                                    <i class="far fa-eye"></i>
-                                                                </a>
-                                                                <a href="#" class="btn btn-success">
-                                                                    <i class="fas fa-cart-plus"></i>
-                                                                </a>
-                                                            </div>
+                                                        <p>
+                                                            @if ($product->quantity > 0)
+                                                                <span class="badge badge-success">@lang('products.titles.Instock')</span>
+                                                            @else
+                                                                <span class="badge badge-danger">@lang('products.titles.Outstock')</span>
+                                                            @endif
+                                                        </p>
+                                                    </div>
+                                                    <div class="card-footer d-flex justify-content-end">
+                                                        <div class="col-6 d-flex justify-content-end">
+                                                            <a href="{{ route('products.show', $product->id) }}" class="btn btn-info mx-2">
+                                                                <i class="far fa-eye"></i> Ver
+                                                            </a>
+                                                            @if ($product->quantity > 0)
+                                                            <form id="add-cart-{{ $product->id }}" action="{{ route('cart.store') }}" method="POST">
+                                                                @csrf
+                                                                <input type="hidden" name="name" value="{{ $product->name }}">
+                                                            </form>
+                                                            <button type="submit" class="btn btn-primary" form="add-cart-{{ $product->id }}">
+                                                                <em class="fas fa-cart-plus"></em> Comprar
+                                                            </button>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                 </div>    

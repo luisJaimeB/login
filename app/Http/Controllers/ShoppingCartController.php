@@ -2,85 +2,37 @@
 
 namespace App\Http\Controllers;
 
+use App\Constants\PaymentGateways;
 use App\Models\ShoppingCart;
-use App\Http\Requests\StoreShoppingCartRequest;
 use App\Http\Requests\UpdateShoppingCartRequest;
+use App\Models\Product;
+use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class ShoppingCartController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index(): View
     {
-        //
+        $gateways = (new PaymentGateways())->toArray();
+
+        return view('products.cart', compact('gateways'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function store(Request $request): RedirectResponse
     {
-        //
+        $product = Product::whereName($request->name)->firstOrFail();
+
+        Cart::add($product->id, $product->name, $product->quantity, $product->price);
+
+        return back();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreShoppingCartRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreShoppingCartRequest $request)
+    public function destroy()
     {
-        //
-    }
+        Cart::destroy();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\ShoppingCart  $shoppingCart
-     * @return \Illuminate\Http\Response
-     */
-    public function show(ShoppingCart $shoppingCart)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\ShoppingCart  $shoppingCart
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(ShoppingCart $shoppingCart)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateShoppingCartRequest  $request
-     * @param  \App\Models\ShoppingCart  $shoppingCart
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateShoppingCartRequest $request, ShoppingCart $shoppingCart)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\ShoppingCart  $shoppingCart
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(ShoppingCart $shoppingCart)
-    {
-        //
+        return redirect()->route('products.index');
     }
 }

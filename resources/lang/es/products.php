@@ -8,8 +8,12 @@ return [
         'products' => 'Productos',
         'enterData' => 'Ingresar datos del producto',
         'editData' => 'Editar datos del producto',
-        'stock' => 'Productos en stock',
+        'Instock' => 'En stock',
+        'Outstock' => 'Sin stock',
         'detailProd' => 'Detalles del producto',
+        'basicDetails' => 'Detalles básicos',
+        'orderDetails' => 'Detalles del pedido',
+        'placeOrder' => 'Realizar el pedido',
     ],
 
     'messages' => [
@@ -33,6 +37,10 @@ return [
             'label' => 'Categorías',
             'th' => 'Categoría',
             'option' => 'Escoge una categoría',
+        ],
+        'quantity' => [
+            'label' => 'Quantity',
+            'placeholder' => 'Ingresa la cantidad',
         ],
         'image' => 'Imagen',
         'publicationDate' => 'Fecha de publicación',

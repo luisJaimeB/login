@@ -20,6 +20,7 @@ class ProductEditRequest extends FormRequest
             'name' => ['required', 'min:5', 'max:50', 'unique:products,name,' . $product->id],
             'description' => ['required', 'min:50', 'max:340'],
             'price' => ['required'],
+            'quantity' => ['required'],
             'image' => ['nullable', 'image', 'mimes:jpeg,png', 'max:3064'],
         ];
     }
