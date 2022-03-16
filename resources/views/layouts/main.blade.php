@@ -32,7 +32,7 @@
         <div class="fixed-plugin">
           <div class="dropdown show-dropdown">
             <a href="{{ route('cart.index') }}">
-              <i class="fas fa-2x fa-cart-arrow-down" style="color: rgb(135, 67, 245)"></i>
+              <i class="fas fa-2x fa-cart-arrow-down" style="color: rgb(194, 27, 27)"></i>
             </a>
             <ul class="dropdown-menu">
               <li class="header-title"> Sidebar Filters</li>
@@ -111,7 +111,7 @@
         <script src="{{ asset('/js/core/bootstrap-material-design.min.js') }}"></script>
         <script src="{{ asset('/js/plugins/perfect-scrollbar.jquery.min.js') }}"></script>
         @stack('js')
-        <script src="https://www.paypal.com/sdk/js?client-id=AYsJYvXbOx_0f-Y8LHigM1jxIQ7CMOOe-DiqYi8djeXGAIpfjJ2wkZcIaJt9vSh4NFST221r0-XAXvvj&currency=USD"></script>
+{{--         <script src="https://www.paypal.com/sdk/js?client-id={{ env('PAYPAL_CLIENT_ID') }}&currency=USD"></script>
 
         <script>
             paypal.Buttons({
@@ -119,6 +119,9 @@
               // Sets up the transaction when a payment button is clicked
               createOrder: function(data, actions) {
                 return actions.order.create({
+                  application_context: {
+                    shipping_preference: "NO_SHIPPING"
+                  },
                   purchase_units: [{
                     amount: {
                       value: '77.44' // Can reference variables or functions. Example: `value: document.getElementById('...').value`
@@ -143,7 +146,6 @@
                 });
               }
             }).render('#paypal-button-container');
-
-          </script>
+          </script> --}}
     </body>
 </html>

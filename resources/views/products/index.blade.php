@@ -21,14 +21,15 @@
                                               </button>
                                         </div>    
                                     @endif
-                                    @foreach ($products->chunk(3) as $chunk)
+                                    @foreach ($products->chunk(4) as $chunk)
                                         <div class="row justify-content-center">
                                             @foreach ($chunk as $product)
-                                                <div class="card mr-5" style="width: 25rem;">
+                                            <div class="col-12 col-sm-12 col-md-6 col-lg-3">
+                                                <div class="card mr-2">
                                                     <img class="card-img-top" src="{{ $product->image->path_url }}" alt="Card image cap">
                                                     <div class="card-body">
                                                         <p class="card-text">{{$product->name}}</p>
-                                                        <p class="card-text">{{$product->description}}</p>
+                                                        <p class="card-text">{{ $product->preview_description }}</p>
                                                         <p class="card-text"><strong>$ {{$product->price}}</strong></p>
                                                         <p><span class="badge badge-info">{{ $product->category->name }}</span></p>
                                                         <p>
@@ -40,22 +41,21 @@
                                                         </p>
                                                     </div>
                                                     <div class="card-footer d-flex justify-content-end">
-                                                        <div class="col-6 d-flex justify-content-end">
-                                                            <a href="{{ route('products.show', $product->id) }}" class="btn btn-info mx-2">
+                                                            <a href="{{ route('products.show', $product->id) }}" class="btn btn-sm btn-info mx-2">
                                                                 <i class="far fa-eye"></i> Ver
                                                             </a>
                                                             @if ($product->quantity > 0)
                                                             <form id="add-cart-{{ $product->id }}" action="{{ route('cart.store') }}" method="POST">
                                                                 @csrf
-                                                                <input type="hidden" name="name" value="{{ $product->name }}">
+                                                                <input type="hidden" name="id" value="{{ $product->id }}">
                                                             </form>
-                                                            <button type="submit" class="btn btn-primary" form="add-cart-{{ $product->id }}">
+                                                            <button type="submit" class="btn btn-sm btn-primary" form="add-cart-{{ $product->id }}">
                                                                 <em class="fas fa-cart-plus"></em> Comprar
                                                             </button>
                                                             @endif
-                                                        </div>
                                                     </div>
-                                                </div>    
+                                                </div> 
+                                            </div>
                                             @endforeach
                                         </div>
                                     @endforeach
@@ -68,7 +68,6 @@
                     </div>
                 </div>
             </div>
-            
         </div>
     </div>
 @endsection

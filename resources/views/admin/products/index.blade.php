@@ -37,6 +37,7 @@
                                                 <th>@lang('products.fields.categories.th')</th>
                                                 <th>@lang('products.fields.quantity.label')</th>
                                                 <th>@lang('products.fields.image')</th>
+                                                <th>@lang('common.status')</th>
                                                 <th class="text-right">@lang('common.actions')</th>
                                             </thead>
                                             <tbody class="text-center">
@@ -48,11 +49,21 @@
                                                         <td><strong>&#36; </strong>{{ $product->price}}</td>
                                                         <td>{{ $product->category->name}}</td>
                                                         <td>{{ $product->quantity}}</td>
-                                                        <td><img class="rounded mx-auto" src="{{ $product->image->path_url }}" alt="Card image cap" width="304"></td>
+                                                        <td class="w-25"><img class="rounded mx-auto w-50" src="{{ $product->image->path_url }}" alt="Card image cap" width="304"></td>
+                                                            @if ($product->status == 1)
+                                                                <td>
+                                                                    <a href="{{ route('admin.products.change.status', $product->id) }}" class="badge badge-info">
+                                                                        <span>@lang('users.fields.status.active')</span>    
+                                                                    </a>
+                                                                </td>
+                                                            @else
+                                                                <td>
+                                                                    <a href="{{ route('admin.products.change.status', $product->id) }}" class="badge badge-danger">
+                                                                        <span>@lang('users.fields.status.Inactive')</span>
+                                                                    </a>  
+                                                                </td>
+                                                            @endif
                                                         <td class="td-actions text-right">
-                                                            {{-- <button type="button" class="btn btn-info" data-toggle="modal" data-target="#detailModal" @click="detail">
-                                                                <i class="material-icons">person</i>
-                                                            </button> --}}
                                                             <a href="{{ route('admin.products.show', $product->id) }}" class="btn btn-info">
                                                                 <i class="material-icons">person</i>
                                                             </a>
@@ -63,7 +74,7 @@
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <button class="btn btn-danger" type="submit" rel="tooltip">
-                                                                    <i class="material-icons">close</i>{{--  --}}
+                                                                    <i class="material-icons">close</i>
                                                                 </button>
                                                             </form>
                                                         </td>
