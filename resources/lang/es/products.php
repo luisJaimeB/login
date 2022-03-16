@@ -18,6 +18,7 @@ return [
 
     'messages' => [
         'comfirmDelProduct' => '¿Está seguro? el producto será eliminado',
+        'maxProductBuy' => ' disponibles',
     ],
 
     'fields' => [

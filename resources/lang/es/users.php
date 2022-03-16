@@ -42,6 +42,46 @@ return [
             'active' => 'Activo',
             'Inactive' => 'Inactivo',
         ],
+        'firstName' => [
+            'label' => 'Nombres',
+            'th' => 'Nombres',
+            'placeholder' => 'Ingresa tu nombre',
+        ],
+        'lastName' => [
+            'label' => 'Apellido',
+            'th' => 'Apellido',
+            'placeholder' => 'Ingresa tu apellido',
+        ],
+        'phoneNumber' => [
+            'label' => 'Teléfono',
+            'th' => 'Teléfono',
+            'placeholder' => 'Ingresa tu teléfono',
+        ],
+        'address' => [
+            'label' => 'Dirección',
+            'th' => 'dirección',
+            'placeholder' => 'Ingresa tu dirección',
+        ],
+        'city' => [
+            'label' => 'Ciudad',
+            'th' => 'Ciudad',
+            'placeholder' => 'Ingresa tu ciudad',
+        ],
+        'estate' => [
+            'label' => 'Estado',
+            'th' => 'Estado',
+            'placeholder' => 'Ingresa tu estado o departamento',
+        ],
+        'country' => [
+            'label' => 'País',
+            'th' => 'País',
+            'placeholder' => 'Ingresa tu país',
+        ],
+        'postalCode' => [
+            'label' => 'Código postal',
+            'th' => 'Código postal',
+            'placeholder' => 'Ingresa tu código postal',
+        ],
     ],
 
 ];

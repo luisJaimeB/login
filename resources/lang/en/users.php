@@ -35,12 +35,52 @@ return [
         'password' => [
             'label' => 'Password',
             'th' => 'Password',
-            'placeholder' => 'enter your password',
+            'placeholder' => 'Enter your password',
         ],
         'status' => [
             'status' => 'Status',
             'active' => 'Active',
             'Inactive' => 'Inactive',
+        ],
+        'firstName' => [
+            'label' => 'first name',
+            'th' => 'first name',
+            'placeholder' => 'Enter your first name',
+        ],
+        'lastName' => [
+            'label' => 'Last name',
+            'th' => 'Last name',
+            'placeholder' => 'Enter your last name',
+        ],
+        'phoneNumber' => [
+            'label' => 'Phone number',
+            'th' => 'Phone number',
+            'placeholder' => 'Enter your phone number',
+        ],
+        'address' => [
+            'label' => 'Address',
+            'th' => 'Address',
+            'placeholder' => 'Enter your Address',
+        ],
+        'city' => [
+            'label' => 'City',
+            'th' => 'City',
+            'placeholder' => 'Enter your City',
+        ],
+        'estate' => [
+            'label' => 'Estate',
+            'th' => 'Estate',
+            'placeholder' => 'Enter your state or department',
+        ],
+        'country' => [
+            'label' => 'Country',
+            'th' => 'Country',
+            'placeholder' => 'Enter your Country',
+        ],
+        'postalCode' => [
+            'label' => 'postal Code',
+            'th' => 'postal Code',
+            'placeholder' => 'Enter your postal code',
         ],
 
     ],

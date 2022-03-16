@@ -18,6 +18,7 @@ return [
 
     'messages' => [
         'comfirmDelProduct' => 'You are sure? the product will be removed',
+        'maxProductBuy' => ' available',
     ],
 
     'fields' => [

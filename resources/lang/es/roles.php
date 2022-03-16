@@ -9,7 +9,7 @@ return [
         'enterData' => 'Ingresar datos del rol',
         'editData' => 'Editar datos del rol',
         'rolesInSys' => 'roles registrados en sistema',
-        'detailProd' => 'Detalles del rol',
+        'detailrole' => 'Detalles del rol',
     ],
 
     'messages' => [

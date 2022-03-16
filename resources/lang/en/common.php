@@ -8,6 +8,11 @@ return [
     'update' => 'Update',
     'cancel' => 'Cancel',
     'actions' => 'Actions',
-    'addtocart' => 'Add to cart',
+    'status' => 'status',
+    'see' => 'See',
+    'cart' => 'Cart',
+    'add' => 'Add',
     'emptyCart' => 'Empty cart',
+    'subtotal' => 'subtotal',
+    'total' => 'Total',
 ];
