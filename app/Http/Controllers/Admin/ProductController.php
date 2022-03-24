@@ -109,4 +109,12 @@ class ProductController extends Controller
 
         return back()->with('success', 'Producto eliminado correctamente');
     }
+
+    public function changeStatusProduct(Product $product): RedirectResponse
+    {
+        $product->status = !$product->status;
+        $product->save();
+
+        return back()->with('success', 'Estado actualizado correctamente');
+    }
 }
