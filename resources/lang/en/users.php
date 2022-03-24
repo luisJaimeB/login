@@ -84,5 +84,9 @@ return [
         ],
 
     ],
+    'documentTypes' => [
+        'cc' => 'Citizenship card ',
+        'ce' => 'Alien identification card',
+    ],
 
 ];

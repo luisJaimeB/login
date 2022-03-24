@@ -83,5 +83,8 @@ return [
             'placeholder' => 'Ingresa tu código postal',
         ],
     ],
-
+    'documentTypes' => [
+        'cc' => 'Cédula ciudadanía',
+        'ce' => 'Cédula extranjería',
+    ],
 ];
