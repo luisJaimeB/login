@@ -15,13 +15,13 @@
     <!-- FontAwesome icons-->
     <script src="https://kit.fontawesome.com/6261fac1b2.js" crossorigin="anonymous"></script>
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="css/styles.css" rel="stylesheet" />
+    <link href="{{ asset('css/styles.css') }}" rel="stylesheet" />
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
-<body>
-    <div id="app">
+<body class="h-100">
+    <div id="app" class="d-flex flex-column min-vh-100">
                 <!-- Navigation-->
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
                     <div class="container px-4 px-lg-5">
@@ -125,15 +125,15 @@
             </div>
         </nav> --}}
 
-        <main>
+        <main class="flex-grow-1">
             <notifications position="bottom right"></notifications>
             @yield('content')
         </main>
+        <!-- Footer-->
+        <footer class="py-5 bg-dark">
+            <div class="container"><p class="m-0 text-center text-white"><strong>Copyright &copy; Mercatodo 2022</strong></p></div>
+        </footer>
     </div>
-    <!-- Footer-->
-    <footer class="py-5 bg-dark">
-        <div class="container"><p class="m-0 text-center text-white"><strong>Copyright &copy; Mercatodo 2022</strong></p></div>
-    </footer>
     @stack('scripts')
 </body>
 </html>
