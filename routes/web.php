@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
@@ -94,8 +95,20 @@ Route::group(['middleware' => ['auth', 'role:Admin', 'verified']], function () {
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
     
-    Route::get('checkout', [PaymentController::class, 'create'])
-        ->name('checkout.create');
+    Route::get('checkout', [PaymentController::class, 'index'])
+        ->name('checkout.index');
+
+    Route::post('checkout', [PaymentController::class, 'store'])
+        ->name('checkout.store');
+
+    Route::get('checkout/{number}/edit', [PaymentController::class, 'edit'])
+        ->name('checkout.edit');
+
+    Route::get('invoices/{invoice}', [InvoiceController::class, 'show'])
+        ->name('invoices.show');
+
+    Route::get('invoices', [InvoiceController::class, 'index'])
+        ->name('invoices.index');
 });
 
 Route::get('/products', [ProductController::class, 'index'])

@@ -15,4 +15,7 @@ return [
     'emptyCart' => 'Empty cart',
     'subtotal' => 'subtotal',
     'total' => 'Total',
+    'messages' => [
+        'buying' => 'Shopping on :app'
+    ],
 ];

@@ -11,54 +11,73 @@
                                 <div class="card-title"><strong>@lang('products.titles.basicDetails')</strong></div>
                             </div>
                             <div class="card-body">
+                                @if (session('error'))
+                                        <div class="alert alert-danger" role="success">
+                                            {{ session('error') }}
+                                            {{-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button> --}}
+                                        </div>    
+                                    @endif
                                 <hr>
                                 <div class="row checkout-form">
-                                    <div class="col-md-6">
-                                        <label class="form-label" for="">@lang('users.fields.firstName.label')</label>
-                                        <input type="text" class="form-control" placeholder="@lang('users.fields.firstName.placeholder')">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label" for="">@lang('users.fields.lastName.label')</label>
-                                        <input type="text" class="form-control" placeholder="@lang('users.fields.lastName.placeholder')">
-                                    </div>
-                                    <div class="col-md-6 mt-3">
-                                        <label class="form-label" for="">@lang('users.fields.email.label')</label>
-                                        <input type="text" class="form-control" placeholder="@lang('users.fields.email.placeholder')">
-                                    </div>
-                                    <div class="col-md-6 mt-3">
-                                        <label class="form-label" for="">@lang('users.fields.phoneNumber.label')</label>
-                                        <input type="text" class="form-control" placeholder="@lang('users.fields.phoneNumber.placeholder')">
-                                    </div>
-                                    <div class="col-md-6 mt-3">
-                                        <label class="form-label" for="">@lang('users.fields.address.label') 1</label>
-                                        <input type="text" class="form-control" placeholder="@lang('users.fields.address.placeholder')">
-                                    </div>
-                                    <div class="col-md-6 mt-3">
-                                        <label class="form-label" for="">@lang('users.fields.address.label') 2</label>
-                                        <input type="text" class="form-control" placeholder="@lang('users.fields.address.placeholder')">
-                                    </div>
-                                    <div class="col-md-6 mt-3">
-                                        <label class="form-label" for="">@lang('users.fields.city.label')</label>
-                                        <input type="text" class="form-control" placeholder="@lang('users.fields.city.placeholder')">
-                                    </div>
-                                    <div class="col-md-6 mt-3">
-                                        <label class="form-label" for="">@lang('users.fields.estate.label')</label>
-                                        <input type="text" class="form-control" placeholder="@lang('users.fields.estate.placeholder')">
-                                    </div>
-                                    <div class="col-md-6 mt-3">
-                                        <label class="form-label" for="">@lang('users.fields.country.label')</label>
-                                        <input type="text" class="form-control" placeholder="@lang('users.fields.country.placeholder')">
-                                    </div>
-                                    <div class="col-md-6 mt-3">
-                                        <label class="form-label" for="">@lang('users.fields.postalCode.label')</label>
-                                        <input type="text" class="form-control" placeholder="@lang('users.fields.postalCode.placeholder')">
-                                    </div>
+                                    <form action="{{ route('checkout.store') }}" id="data-form" method="post">
+                                        @csrf
+                                        <div class="col-md-6">
+                                            <label class="form-label" for="">@lang('users.fields.firstName.label')</label>
+                                            <input type="text" class="form-control" value="{{ old('name', Auth::user()->name) }}">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label" for="">@lang('users.fields.lastName.label')</label>
+                                            <input type="text" class="form-control" value="{{ old('name', Auth::user()->last_name) }}" placeholder="@lang('users.fields.lastName.placeholder')" name="last_name">
+                                            @if ($errors->has('last_name'))
+                                            @endif
+                                        </div>
+                                        <div class="col-md-6 mt-3">
+                                            <label class="form-label" for="">DocType</label>
+                                            <select class="form-control" name="type_document_id">
+                                                <option value="">Select</option>
+                                                @foreach ($documentTypes as $documentType)
+                                                    <option value="{{ $documentType->id }}">{{ $documentType->type }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 mt-3">
+                                            <label class="form-label" for="">Número de doc</label>
+                                            <input type="text" class="form-control" value="{{ old('name', Auth::user()->mobile_number) }}" placeholder="Número de documento" name="identification_number">
+                                            @if ($errors->has('identification_number'))
+                                            @endif
+                                        </div>
+                                        <div class="col-md-6 mt-3">
+                                            <label class="form-label" for="">@lang('users.fields.email.label')</label>
+                                            <input type="text" class="form-control" value="{{ old('email', Auth::user()->email) }}">
+                                        </div>
+                                        <div class="col-md-6 mt-3">
+                                            <label class="form-label" for="">@lang('users.fields.phoneNumber.label')</label>
+                                            <input type="text" class="form-control" name="mobile_number" value="{{ old('name', Auth::user()->identification_number) }}" placeholder="@lang('users.fields.phoneNumber.placeholder')">
+                                            @if ($errors->has('mobile_number'))
+                                            @endif
+                                        </div>
+                                        
+                                        <div class="col-md-6 mt-3">
+                                            <label class="form-label" for="">@lang('users.fields.address.label')</label>
+                                            <input type="text" class="form-control" name="address" value="{{ old('email', Auth::user()->address) }}" placeholder="@lang('users.fields.address.placeholder')">
+                                            @if ($errors->has('address'))
+                                            @endif
+                                        </div>
+                                        <div class="col-md-6 mt-3">
+                                            <label class="form-label" for="">@lang('users.fields.postalCode.label')</label>
+                                            <input type="text" class="form-control" name="postal_code" value="{{ old('email', Auth::user()->postal_code) }}" placeholder="@lang('users.fields.postalCode.placeholder')">
+                                            @if ($errors->has('postal_code'))
+                                            @endif
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                             <div class="card-footer justify-content-center">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <button class="btn float-end" style="background-color: rgb(226, 126, 11)">PlaceToPay</button>
+                                        <button class="btn float-end" form="data-form" style="background-color: rgb(226, 126, 11)">PlaceToPay</button>
                                     </div>
                                     <div class="col-md-6">
                                         <!-- Set up a container element for the button -->
@@ -109,56 +128,4 @@
             </div>
         </div>
     </div>
-
-    
 @endsection
-@push('scripts')
-    <script src="https://www.paypal.com/sdk/js?client-id={{ env('PAYPAL_CLIENT_ID') }}&currency=USD" defer></script>
-
-    <script defer>
-        if (paypal) {
-            paypal.Buttons({
-            // Sets up the transaction when a payment button is clicked
-            createOrder: function(data, actions) {
-                return actions.order.create({
-                application_context: {
-                    shipping_preference: "NO_SHIPPING"
-                },
-                payer: {
-                    email_address: '{{ auth()->user()->email }}',
-                    name: {
-                        given_name: '{{ auth()->user()->name }}'
-                    },
-                    address: {
-                        address_line: 'asddd',
-                        postal_code: 'asd'
-
-                    }
-                },
-                purchase_units: [{
-                    amount: {
-                    value: '77.44' // Can reference variables or functions. Example: `value: document.getElementById('...').value`
-                    }
-                }]
-                });
-            },
-
-            // Finalize the transaction after payer approval
-            onApprove: function(data, actions) {
-                return actions.order.capture().then(function(orderData) {
-                // Successful capture! For dev/demo purposes:
-                    console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
-                    var transaction = orderData.purchase_units[0].payments.captures[0];
-                    alert('Transaction '+ transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');
-
-                // When ready to go live, remove the alert and show a success message within this page. For example:
-                // var element = document.getElementById('paypal-button-container');
-                // element.innerHTML = '';
-                // element.innerHTML = '<h3>Thank you for your payment!</h3>';
-                // Or go to another URL:  actions.redirect('thank_you.html');
-                });
-            }
-        }).render('#paypal-button-container');    
-        }
-    </script>
-@endpush

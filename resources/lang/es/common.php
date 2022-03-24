@@ -16,4 +16,7 @@ return [
     'emptyCart' => 'Vaciar carrito',
     'subtotal' => 'Subtotal',
     'total' => 'Total',
+    'messages' => [
+        'buying' => 'Comprando en :app'
+    ],
 ];
