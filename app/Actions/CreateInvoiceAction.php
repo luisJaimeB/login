@@ -9,13 +9,15 @@ use Illuminate\Support\Facades\DB;
 
 class CreateInvoiceAction
 {
-    public static function excecute(): Invoice
+    public static function execute(): Invoice
     {
         return DB::transaction(function () {
             $data = self::makeData();
             $invoice = self::createInvoice();
     
             $invoice->products()->attach($data);
+
+            Cart::destroy();
             
             return $invoice;
         });
@@ -39,25 +41,26 @@ class CreateInvoiceAction
     private static function createInvoice(): Invoice
     {
         $invoice = new Invoice();
-        $invoice->number = self::generateNumber();
+        $invoice->reference = self::generateReference();
         $invoice->total = Cart::subtotal(0, '.', '');
         $invoice->user_id = auth()->id();
+        $invoice->payment_expiration = now()->addHours(12);
         $invoice->save();
 
         return $invoice;
     }
 
-    private static function generateNumber(): string
+    private static function generateReference(): string
     {
         do {
-            $number = null;
-            $temporaryNumber = date('ymd') . strtoupper(Str::random(6));
+            $reference = null;
+            $temporaryReference = date('ymd') . strtoupper(Str::random(6));
             
-            if (!Invoice::where('number', $temporaryNumber)->exists()) {
-                $number = $temporaryNumber;
+            if (!Invoice::where('reference', $temporaryReference)->exists()) {
+                $reference = $temporaryReference;
             }
-        } while (is_null($number));
+        } while (is_null($reference));
 
-        return $number;
+        return $reference;
     }
 }
