@@ -1,16 +1,15 @@
-@extends('layouts.main', ['activePage' => 'products', 'titlePage' => 'Productos'])
+@extends('layouts.main', ['activePage' => 'invoices', 'titlePage' => 'Facturas'])
 @section('content')
     <div class="content">
         <div class="container-fluid">
-            {{-- <product-index :products='@json($products)'></product-index> --}}
             <div class="row">
                 <div class="col-md-12">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header card-header-primary">
-                                    <div class="card-title"><strong>@lang('products.titles.products')</strong></div>
-                                    <div class="card-category">@lang('products.titles.stock')</div>
+                                    <div class="card-title"><h3><strong>@lang('invoices.titles.invoices')</strong></h3></div>
+                                    <div class="card-category"><h4>@lang('invoices.titles.purchasehistory')</h4></div>
                                 </div>
                                 <div class="card-body">
                                     @if (session('success'))
@@ -27,11 +26,35 @@
                                             <div class="col-12 col-sm-12 col-md-6 col-lg-3">
                                                 <div class="card mr-2">
                                                     <div class="card-body">
-                                                        <p class="card-text">{{ $invoice->number }}</p>
-                                                        <p class="card-text">{{ $invoice->total }}</p>
-                                                        <p class="card-text"><strong>{{ $invoice->created_at }}</strong></p>
-                                                        <p><span class="badge badge-info">{{ $invoice->invoice_status }}</span></p>
-                                                        <p></p>
+                                                        <div>
+                                                            <h3 class="fw-bold text-center">@lang('invoices.titles.nInvoice')</h3>
+                                                            <strong><p class="card-text text-center">{{ $invoice->reference }}</p></strong>
+                                                        </div>
+                                                        <br>
+                                                        <div class="row table-active">
+                                                            <div class="col-md-6">
+                                                                <h4 class="fw-bold text-center">@lang('common.total')</h4>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <strong><p class="card-text fw-bold">{{ $invoice->total }}</p></strong>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <h4 class="fw-bold text-center">@lang('common.date')</h4>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <p class="card-text fw-bold">{{ $invoice->created_at }}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row table-active">
+                                                            <div class="col-md-6">
+                                                                <h4 class="fw-bold text-center">@lang('common.status')</h4>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <h4><span class="badge badge-warning">{{ $invoice->invoice_status }}</span></h4>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                     <div class="card-footer d-flex justify-content-end">
                                                             <a href="{{ route('invoices.show', $invoice) }}" class="btn btn-sm btn-info mx-2">

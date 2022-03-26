@@ -57,6 +57,12 @@
             <p>@lang('products.titles.products')</p>
         </a>
       </li>
+      <li class="nav-item{{ $activePage == 'invoices' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('invoices.index') }}">
+          <i class="material-icons">receipt</i>
+            <p>@lang('invoices.titles.invoices')</p>
+        </a>
+      </li>
       @can('permissions.index')
       <li class="nav-item{{ $activePage == 'permissions' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('permissions.index') }}">

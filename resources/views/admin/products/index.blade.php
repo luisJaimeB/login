@@ -83,38 +83,6 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    {{-- @foreach ($products->chunk(3) as $chunk)
-                                        <div class="row justify-content-center">
-                                            @foreach ($chunk as $product)
-                                                <div class="card mr-5" style="width: 25rem;">
-                                                    <img class="card-img-top" src="{{ $product->image->path_url }}" alt="Card image cap" width="350">
-                                                    <div class="card-body">
-                                                        <p class="card-text">{{$product->name}}</p>
-                                                        <p class="card-text">{{$product->description}}</p>
-                                                        <p class="card-text"><strong>$ {{$product->price}}</strong></p>
-                                                        <p><span class="badge badge-info">{{ $product->category->name }}</span></p>
-                                                        <div class="row">
-                                                            <div class="col-9 jutify-content-right">
-                                                                <a href="{{ route('admin.products.show', $product->id) }}" class="btn btn-info">
-                                                                    <i class="material-icons">person</i>
-                                                                </a>
-                                                                <a href="{{ route('admin.products.edit', $product->id) }}" class="btn btn-warning">
-                                                                    <i class="material-icons">edit</i>
-                                                                </a>
-                                                                <form action="{{ route('admin.products.destroy', $product->id) }}" method="POST" style="display: inline-block;" onsubmit="return confirm('@lang('products.messages.comfirmDelProduct')')">
-                                                                    @csrf
-                                                                    @method('DELETE') 
-                                                                    <button class="btn btn-danger" type="submit" rel="tooltip">
-                                                                        <i class="material-icons">close</i>
-                                                                    </button>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>    
-                                            @endforeach
-                                        </div>
-                                    @endforeach --}}
                                     <div class="card-footer mr-auto pagination justify-content-center">
                                         {{ $products->links() }}
                                     </div>
