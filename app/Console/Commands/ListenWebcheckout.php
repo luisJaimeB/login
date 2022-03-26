@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Actions\QueryInvoiceAction;
+use App\Actions\VerifyPaymentStatus;
 use App\Constants\InvoiceStatus;
 use App\Models\Invoice;
 use App\Services\WebCheckoutService;
@@ -46,7 +46,7 @@ class ListenWebcheckout extends Command
             ->get();
 
         foreach ($invoices as $invoice) {
-            QueryInvoiceAction::excecute($webCheckout, $invoice);    
+            VerifyPaymentStatus::execute($webCheckout, $invoice);    
         }
         
         return self::SUCCESS;

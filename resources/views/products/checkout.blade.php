@@ -21,55 +21,62 @@
                                     @endif
                                 <hr>
                                 <div class="row checkout-form">
-                                    <form action="{{ route('checkout.store') }}" id="data-form" method="post">
+                                    <form action="{{ route('payments.store') }}" id="data-form" method="post">
                                         @csrf
-                                        <div class="col-md-6">
-                                            <label class="form-label" for="">@lang('users.fields.firstName.label')</label>
-                                            <input type="text" class="form-control" value="{{ old('name', Auth::user()->name) }}">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label class="form-label" for="">@lang('users.fields.firstName.label')</label>
+                                                <input type="text" class="form-control" value="{{ old('name', Auth::user()->name) }}">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label" for="">@lang('users.fields.lastName.label')</label>
+                                                <input type="text" class="form-control" value="{{ old('name', Auth::user()->last_name) }}" placeholder="@lang('users.fields.lastName.placeholder')" name="last_name">
+                                                @if ($errors->has('last_name'))
+                                                @endif
+                                            </div>    
                                         </div>
-                                        <div class="col-md-6">
-                                            <label class="form-label" for="">@lang('users.fields.lastName.label')</label>
-                                            <input type="text" class="form-control" value="{{ old('name', Auth::user()->last_name) }}" placeholder="@lang('users.fields.lastName.placeholder')" name="last_name">
-                                            @if ($errors->has('last_name'))
-                                            @endif
+                                        <div class="row">
+                                            <div class="col-md-6 mt-3">
+                                                <label class="form-label" for="">DocType</label>
+                                                <select class="form-control" name="type_document_id">
+                                                    <option value="" selected disabled>Select</option>
+                                                    @foreach ($documentTypes as $documentType)
+                                                        <option value="{{ $documentType->id }}">{{ $documentType->type }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6 mt-3">
+                                                <label class="form-label" for="">Número de doc</label>
+                                                <input type="text" class="form-control" value="{{ old('name', Auth::user()->identification_number) }}" placeholder="Número de documento" name="identification_number">
+                                                @if ($errors->has('identification_number'))
+                                                @endif
+                                            </div>
                                         </div>
-                                        <div class="col-md-6 mt-3">
-                                            <label class="form-label" for="">DocType</label>
-                                            <select class="form-control" name="type_document_id">
-                                                <option value="">Select</option>
-                                                @foreach ($documentTypes as $documentType)
-                                                    <option value="{{ $documentType->id }}">{{ $documentType->type }}</option>
-                                                @endforeach
-                                            </select>
+                                        <div class="row">
+                                            <div class="col-md-6 mt-3">
+                                                <label class="form-label" for="">@lang('users.fields.email.label')</label>
+                                                <input type="text" class="form-control" value="{{ old('email', Auth::user()->email) }}">
+                                            </div>
+                                            <div class="col-md-6 mt-3">
+                                                <label class="form-label" for="">@lang('users.fields.phoneNumber.label')</label>
+                                                <input type="text" class="form-control" name="mobile_number" value="{{ old('name', Auth::user()->mobile_number) }}" placeholder="@lang('users.fields.phoneNumber.placeholder')">
+                                                @if ($errors->has('mobile_number'))
+                                                @endif
+                                            </div>
                                         </div>
-                                        <div class="col-md-6 mt-3">
-                                            <label class="form-label" for="">Número de doc</label>
-                                            <input type="text" class="form-control" value="{{ old('name', Auth::user()->mobile_number) }}" placeholder="Número de documento" name="identification_number">
-                                            @if ($errors->has('identification_number'))
-                                            @endif
-                                        </div>
-                                        <div class="col-md-6 mt-3">
-                                            <label class="form-label" for="">@lang('users.fields.email.label')</label>
-                                            <input type="text" class="form-control" value="{{ old('email', Auth::user()->email) }}">
-                                        </div>
-                                        <div class="col-md-6 mt-3">
-                                            <label class="form-label" for="">@lang('users.fields.phoneNumber.label')</label>
-                                            <input type="text" class="form-control" name="mobile_number" value="{{ old('name', Auth::user()->identification_number) }}" placeholder="@lang('users.fields.phoneNumber.placeholder')">
-                                            @if ($errors->has('mobile_number'))
-                                            @endif
-                                        </div>
-                                        
-                                        <div class="col-md-6 mt-3">
-                                            <label class="form-label" for="">@lang('users.fields.address.label')</label>
-                                            <input type="text" class="form-control" name="address" value="{{ old('email', Auth::user()->address) }}" placeholder="@lang('users.fields.address.placeholder')">
-                                            @if ($errors->has('address'))
-                                            @endif
-                                        </div>
-                                        <div class="col-md-6 mt-3">
-                                            <label class="form-label" for="">@lang('users.fields.postalCode.label')</label>
-                                            <input type="text" class="form-control" name="postal_code" value="{{ old('email', Auth::user()->postal_code) }}" placeholder="@lang('users.fields.postalCode.placeholder')">
-                                            @if ($errors->has('postal_code'))
-                                            @endif
+                                        <div class="row">
+                                            <div class="col-md-6 mt-3">
+                                                <label class="form-label" for="">@lang('users.fields.address.label')</label>
+                                                <input type="text" class="form-control" name="address" value="{{ old('email', Auth::user()->address) }}" placeholder="@lang('users.fields.address.placeholder')">
+                                                @if ($errors->has('address'))
+                                                @endif
+                                            </div>
+                                            <div class="col-md-6 mt-3">
+                                                <label class="form-label" for="">@lang('users.fields.postalCode.label')</label>
+                                                <input type="text" class="form-control" name="postal_code" value="{{ old('email', Auth::user()->postal_code) }}" placeholder="@lang('users.fields.postalCode.placeholder')">
+                                                @if ($errors->has('postal_code'))
+                                                @endif
+                                            </div>
                                         </div>
                                     </form>
                                 </div>
@@ -78,10 +85,6 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <button class="btn float-end" form="data-form" style="background-color: rgb(226, 126, 11)">PlaceToPay</button>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <!-- Set up a container element for the button -->
-                                        <div id="paypal-button-container"></div>
                                     </div>
                                 </div>
                             </div>

@@ -95,20 +95,26 @@ Route::group(['middleware' => ['auth', 'role:Admin', 'verified']], function () {
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
     
-    Route::get('checkout', [PaymentController::class, 'index'])
-        ->name('checkout.index');
+    Route::get('payments', [PaymentController::class, 'index'])
+        ->name('payments.index');
 
-    Route::post('checkout', [PaymentController::class, 'store'])
-        ->name('checkout.store');
+    Route::post('payments', [PaymentController::class, 'store'])
+        ->name('payments.store');
 
-    Route::get('checkout/{number}/edit', [PaymentController::class, 'edit'])
-        ->name('checkout.edit');
+    Route::get('payments/{reference}/retry', [PaymentController::class, 'retry'])
+        ->name('payments.retry');
+    
+    Route::get('payments/{reference}/verify', [PaymentController::class, 'verify'])
+        ->name('payments.verify');
 
     Route::get('invoices/{invoice}', [InvoiceController::class, 'show'])
         ->name('invoices.show');
 
     Route::get('invoices', [InvoiceController::class, 'index'])
         ->name('invoices.index');
+
+    Route::put('invoices/{invoice}', [PaymentController::class, 'update'])
+        ->name('invoices.update');
 });
 
 Route::get('/products', [ProductController::class, 'index'])

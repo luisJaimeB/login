@@ -25,7 +25,7 @@ class WebCheckoutService implements WebcheckoutContract
     {
         $this->data = [
             "payment" => [
-                "reference" => $invoice->number,
+                "reference" => $invoice->reference,
                 "description" => trans('common.messages.buying', ['app' => config('app.name')]),
                 "amount" => [
                     "currency" => "COP",
@@ -34,7 +34,7 @@ class WebCheckoutService implements WebcheckoutContract
                 "allowPartial" => false
             ],
             "expiration"  => now()->addHours(12)->toIso8601String(),
-            "returnUrl" => route('checkout.edit', ['number' => $invoice->number])
+            "returnUrl" => route('payments.verify', ['reference' => $invoice->reference])
         ];
 
         return $this;

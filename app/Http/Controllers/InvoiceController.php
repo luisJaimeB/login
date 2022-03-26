@@ -10,7 +10,7 @@ class InvoiceController extends Controller
 {
     public function index(): View
     {
-        $invoices = Invoice::paginate(config('settings.pagination'));
+        $invoices = Invoice::latest()->paginate(config('settings.pagination'));
 
         return view('invoices.index', compact('invoices'));   
     }
@@ -18,7 +18,6 @@ class InvoiceController extends Controller
     public function show(Invoice $invoice): View
     {
         $invoice->load('products');
-        /* dd($invoice); */
 
         return view('invoices.show', compact('invoice'));
     }
