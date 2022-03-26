@@ -16,10 +16,14 @@ class CreateInvoicesTable extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
-            $table->uuid('number')->unique();
+            $table->string('reference', 32)->unique();
             $table->unsignedBigInteger('request_id')->nullable();
             $table->decimal('total', 10, 2);
             $table->enum('invoice_status', InvoiceStatus::toArray())->default(InvoiceStatus::PENDING);
+            $table->string('issuer_name')->nullable();
+            $table->string('payment_method_name')->nullable();
+            $table->date('date')->nullable();
+            $table->timestamp('payment_expiration');
             $table->foreignId('user_id');
             $table->foreign('user_id')
                 ->references('id')
