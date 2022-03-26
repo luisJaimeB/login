@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Constants\InvoiceStatus;
+use App\Constants\PaymentStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -24,5 +26,17 @@ class Invoice extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function isPending(): bool
+    {
+        return !empty($this->attributes['request_id'])
+            && $this->attributes['invoice_status'] === InvoiceStatus::PENDING;
+    }
+
+    public function couldPay(): bool
+    {
+        return empty($this->attributes['request_id'])
+            || in_array($this->attributes['invoice_status'], [InvoiceStatus::PENDING, InvoiceStatus::CANCELED]);
     }
 }
