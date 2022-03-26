@@ -14,8 +14,12 @@ return [
     'cart' => 'Carrito',
     'add' => 'Añadir',
     'emptyCart' => 'Vaciar carrito',
+    'pay' => 'Pagar',
+    'verify' => 'Verificar',
     'subtotal' => 'Subtotal',
     'total' => 'Total',
+    'date' => 'Fecha',
+
     'messages' => [
         'buying' => 'Comprando en :app'
     ],

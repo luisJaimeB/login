@@ -40,7 +40,7 @@ return [
             'option' => 'Escoge una categoría',
         ],
         'quantity' => [
-            'label' => 'Quantity',
+            'label' => 'Cantidad',
             'placeholder' => 'Ingresa la cantidad',
         ],
         'image' => 'Imagen',

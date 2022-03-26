@@ -3,5 +3,15 @@
 return [
     'paid' => 'Paid',
     'pending' => 'Pending',
-    'canceled' => 'Cancelado',
+    'canceled' => 'Canceled',
+
+    'titles' => [
+        'invoices' => 'Invoices',
+        'nInvoice' => 'Invoice number: ',
+        'issuerName' => 'Issuer',
+        'PayMethod' => 'Payment method',
+        'PaymentDate' => 'Payment date',
+        'invoiceDetail' => 'Invoice details',
+        'purchasehistory' => 'Purchase history',
+    ],
 ];
