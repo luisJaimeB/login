@@ -22,7 +22,7 @@
                         <td class="w-25">
                             <div class="input-group w-50">
                                 <button class="btn btn-outline-secondary" type="button">-</button>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" name="quantity" :value="product.qty">
                                 <button class="btn btn-outline-secondary" type="button" @click="addQty(id)">+</button>
                             </div>
                             <!-- <input type="number" class="form-control col-sm-2" name="quantity" :value="product.qty"> -->
@@ -46,7 +46,7 @@
         </div>
         <div class="card-footer justify-content-center">
             <div class="btn-group">
-                <a href="/checkout" class="btn btn-primary mx-3">
+                <a href="/payments" class="btn btn-primary mx-3">
                     <em class="fas fa-money-bill"></em> Generar Pago
                 </a>
                 <button class="btn btn-danger" @click="destroy">
