@@ -21,9 +21,9 @@
                         <td>{{ product.name }}</td>
                         <td class="w-25">
                             <div class="input-group w-50">
-                                <button class="btn btn-outline-secondary" type="button">-</button>
-                                <input type="text" class="form-control" name="quantity" :value="product.qty">
-                                <button class="btn btn-outline-secondary" type="button" @click="addQty(id)">+</button>
+                                <button class="btn btn-outline-secondary" type="button" @click="decrement(product)">-</button>
+                                <span type="text" class="form-control" name="quantity" :value="product.qty">{{ product.qty }}</span>
+                                <button class="btn btn-outline-secondary" type="button" @click="increment(product)">+</button>
                             </div>
                             <!-- <input type="number" class="form-control col-sm-2" name="quantity" :value="product.qty"> -->
                         </td>
@@ -104,18 +104,29 @@ export default {
                     this.$notify({ type: 'error', text: 'Ha ocurrido un error' })
                 })
         },
-        addQty (id) {
+        increment (product) {
             axios
-                .put('/cart/' + id)
+                .put('/cart/' + product.rowId + '/increment')
                 .then(response => {
-                    this.$notify({ type: 'success', text: 'Uno más!' })
+                    if (response.data.qty > product.qty) {
+                        product.qty = response.data.qty
+                        this.$notify({ type: 'success', text: 'Uno más!' })    
+                    }
                 })
                 .catch(error => {
-                    this.$notify({ type: 'error', text: 'Uno menos!' })
+                    this.$notify({ type: 'error', text: 'Ha ocurrido un error!' })
                 })
         },
-        removeQty () {
-
+        decrement (product) {
+            axios
+                .put('/cart/' + product.rowId + '/decrement')
+                .then(response => {
+                    product.qty = response.data.qty
+                    this.$notify({ type: 'success', text: 'Uno menos!' })
+                })
+                .catch(error => {
+                    this.$notify({ type: 'error', text: 'Ha ocurrido un error!' })
+                })
         }
     },
 };

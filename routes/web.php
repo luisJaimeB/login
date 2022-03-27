@@ -137,3 +137,10 @@ Route::delete('cart/{id}', [ShoppingCartController::class, 'remove'])
 
 Route::delete('cart', [ShoppingCartController::class, 'destroy'])
     ->name('cart.destroy');
+
+Route::put('cart/{rowId}/increment', [ShoppingCartController::class, 'increment'])
+    ->name('cart.increment');
+
+Route::put('cart/{rowId}/decrement', [ShoppingCartController::class, 'decrement'])
+    ->name('cart.decrement');
+

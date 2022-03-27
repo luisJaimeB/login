@@ -18,7 +18,7 @@ class ShoppingCartController extends Controller
     public function index(): View
     {
         $gateways = (new PaymentGateways())->toArray();
-        
+
         return view('products.cart', compact('gateways'));
     }
 
@@ -53,5 +53,34 @@ class ShoppingCartController extends Controller
         Cart::destroy();
 
         return response()->noContent();
+    }
+
+    public function increment(string $rowId): JsonResponse
+    {
+        $row = Cart::get($rowId);
+        $qty = $row->qty;
+
+        $product = Product::find($row->id);
+        if ($row->qty < $product->quantity) {
+            $qty++;
+        }
+
+        Cart::update($rowId,['qty' => $qty]);
+
+        return response()->json(['qty' => $qty]);
+    }
+
+    public function decrement(string $rowId): JsonResponse
+    {
+        $row = Cart::get($rowId);
+        $qty = $row->qty;
+
+        if ($row->qty > 1) {
+            $qty--;
+        }
+
+        Cart::update($rowId,['qty' => $qty]);
+
+        return response()->json(['qty' => $qty]);
     }
 }
