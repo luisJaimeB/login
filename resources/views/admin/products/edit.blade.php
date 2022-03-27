@@ -1,4 +1,4 @@
-@extends('layouts.main', ['activePage' => 'products', 'titlePage' => 'Editar producto'])
+@extends('layouts.main', ['activePage' => 'product-management', 'titlePage' => 'Editar producto'])
 @section('content')
     <div class="content">
         <div class="container-fluid">
@@ -16,7 +16,7 @@
                                 <div class="row">
                                     <label for="name" class="col-sm-2 col-form-label">@lang('products.fields.name.label')</label>
                                     <div class="col-sm-7">
-                                        <input type="text" class="form-control" name="name" value="{{ old('name', $product-> name) }}" autofocus>
+                                        <input type="text" class="form-control" name="name" value="{{ old('name', $product-> name) }}">
                                         @if ($errors->has('name'))
                                             <span class="error text-danger" for="input-name">{{ $errors->first('name') }}</span>
                                         @endif
@@ -34,7 +34,7 @@
                                 <div class="row">
                                     <label for="price" class="col-sm-2 col-form-label">@lang('products.fields.price.label')</label>
                                     <div class="col-sm-7">
-                                        <input type="number" class="form-control" name="price" value="{{ old('price', $product-> price) }}" readonly>
+                                        <input type="number" class="form-control" name="price" value="{{ old('price', $product-> price) }}">
                                         @if ($errors->has('price'))
                                             <span class="error text-danger" for="input-price">{{ $errors->first('price') }}</span>
                                         @endif
@@ -51,6 +51,15 @@
                                         </select>
                                         @if ($errors->has('categories'))
                                             <span class="error text-danger" for="input-categories">{{ $errors->first('categories') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label for="quantity" class="col-sm-2 col-form-label">@lang('products.fields.quantity.label')</label>
+                                    <div class="col-sm-7">
+                                        <input type="number" class="form-control" name="quantity" value="{{ old('quantity', $product-> quantity) }}">
+                                        @if ($errors->has('quantity'))
+                                            <span class="error text-danger" for="input-quantity">{{ $errors->first('quantity') }}</span>
                                         @endif
                                     </div>
                                 </div>

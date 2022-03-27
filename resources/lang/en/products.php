@@ -8,12 +8,17 @@ return [
         'products' => 'Products',
         'enterData' => 'Enter product data',
         'editData' => 'Edit product data',
-        'stock' => 'products in stock',
+        'Instock' => 'In stock',
+        'Outstock' => 'Out stock',
         'detailProd' => 'Product details',
+        'basicDetails' => 'Basic Details',
+        'orderDetails' => 'Order Details',
+        'placeOrder' => 'Place Order',
     ],
 
     'messages' => [
         'comfirmDelProduct' => 'You are sure? the product will be removed',
+        'maxProductBuy' => ' available',
     ],
 
     'fields' => [
@@ -33,6 +38,10 @@ return [
             'label' => 'Categories',
             'th' => 'Category',
             'option' => 'Choose a category',
+        ],
+        'quantity' => [
+            'label' => 'Quantity',
+            'placeholder' => 'Enter the quantity',
         ],
         'image' => 'Image',
         'publicationDate' => 'Publication date',

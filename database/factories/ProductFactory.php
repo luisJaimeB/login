@@ -27,6 +27,7 @@ class ProductFactory extends Factory
             'description'=> $this->faker->sentence(20),
             'price'=> $this->faker->numberBetween(100, 2000),
             'category_id'=> Category::factory()->create()->id,
+            'quantity'=> $this->faker->numberBetween(1, 200),
         ];
     }
 }

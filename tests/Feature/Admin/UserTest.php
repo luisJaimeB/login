@@ -49,7 +49,7 @@ class UserTest extends TestCase
             ->assertViewIs('users.index');
      }
 
-
+    /** @test */
      public function unauthorized_user_can_not_access_to_product_list ()
      {
          /** @var \App\Models\User $user */

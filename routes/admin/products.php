@@ -30,3 +30,6 @@ Route::put('/products/{product}', [ProductController::class, 'update'])
 Route::delete('/products/{product}', [ProductController::class, 'destroy'])
     ->name('products.destroy')
     ->middleware(['permission:admin.products.destroy', 'auth', 'role:Admin', 'verified']);
+
+Route::get('/products/{product}/changeStatusProduct', [ProductController::class, 'changeStatusProduct'])
+    ->name('products.change.status');

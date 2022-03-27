@@ -25,6 +25,6 @@ class ComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::composer('layouts.navbars.navs.auth', CategoriesComposer::class);
+        View::composer('layouts.app', CategoriesComposer::class);
     }
 }

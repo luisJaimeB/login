@@ -17,7 +17,7 @@ class CreateShoppingCartDetailsTable extends Migration
             $table->id();
             $table->integer('quantity')->default(1);
             $table->decimal('price');
-            $table->unsignedBigInteger('sopping_cart_id');
+            $table->unsignedBigInteger('shopping_cart_id');
             $table->foreign('shopping_cart_id')->references('id')->on('shopping_carts');
             $table->unsignedBigInteger('product_id');
             $table->foreign('product_id')->references('id')->on('products');

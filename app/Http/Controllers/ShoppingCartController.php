@@ -2,85 +2,85 @@
 
 namespace App\Http\Controllers;
 
+use App\Constants\PaymentGateways;
 use App\Models\ShoppingCart;
-use App\Http\Requests\StoreShoppingCartRequest;
 use App\Http\Requests\UpdateShoppingCartRequest;
+use App\Models\Product;
+use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\View\View;
 
 class ShoppingCartController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index(): View
     {
-        //
+        $gateways = (new PaymentGateways())->toArray();
+
+        return view('products.cart', compact('gateways'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function store(Request $request): JsonResponse
     {
-        //
+        $product = Product::whereId($request->id)->firstOrFail();
+
+        Cart::add(
+            $product->id,
+            $product->name,
+            $request->input('quantity', 1),
+            $product->price
+        );
+
+        return response()->json(['count' => Cart::count()]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreShoppingCartRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreShoppingCartRequest $request)
+    public function update(string $rowId, Product $product)
     {
-        //
+        Cart::update($rowId, $product);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\ShoppingCart  $shoppingCart
-     * @return \Illuminate\Http\Response
-     */
-    public function show(ShoppingCart $shoppingCart)
+    public function remove(string $id)
     {
-        //
+        Cart::remove($id);
+
+        return response()->noContent();
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\ShoppingCart  $shoppingCart
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(ShoppingCart $shoppingCart)
+    public function destroy()
     {
-        //
+        Cart::destroy();
+
+        return response()->noContent();
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateShoppingCartRequest  $request
-     * @param  \App\Models\ShoppingCart  $shoppingCart
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateShoppingCartRequest $request, ShoppingCart $shoppingCart)
+    public function increment(string $rowId): JsonResponse
     {
-        //
+        $row = Cart::get($rowId);
+        $qty = $row->qty;
+
+        $product = Product::find($row->id);
+        if ($row->qty < $product->quantity) {
+            $qty++;
+        }
+
+        Cart::update($rowId,['qty' => $qty]);
+
+        return response()->json(['qty' => $qty]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\ShoppingCart  $shoppingCart
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(ShoppingCart $shoppingCart)
+    public function decrement(string $rowId): JsonResponse
     {
-        //
+        $row = Cart::get($rowId);
+        $qty = $row->qty;
+
+        if ($row->qty > 1) {
+            $qty--;
+        }
+
+        Cart::update($rowId,['qty' => $qty]);
+
+        return response()->json(['qty' => $qty]);
     }
 }

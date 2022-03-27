@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Mercatodo'),
 
     /*
     |--------------------------------------------------------------------------
@@ -179,6 +179,7 @@ return [
         App\Providers\FortifyServiceProvider::class,
         App\Providers\ComposerServiceProvider::class,
         Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
+        //App\Providers\ShoppingCartProvider::class,
     ],
 
     /*

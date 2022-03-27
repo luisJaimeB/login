@@ -1,4 +1,4 @@
-@extends('layouts.main', ['activePage' => 'products', 'titlePage' => 'Nuevo producto'])
+@extends('layouts.main', ['activePage' => 'product-management', 'titlePage' => 'Nuevo producto'])
 @section('content')
     <div class="content">
         <div class="container-fluid">
@@ -50,6 +50,15 @@
                                         </select>
                                         @if ($errors->has('category'))
                                             <span class="error text-danger" for="input-category">{{ $errors->first('category') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label for="quantity" class="col-sm-2 col-form-label">@lang('products.fields.quantity.label')</label>
+                                    <div class="col-sm-7">
+                                        <input type="number" class="form-control" name="quantity" placeholder="@lang('products.fields.quantity.placeholder')" value="{{ old('quantity') }}">
+                                        @if ($errors->has('quantity'))
+                                            <span class="error text-danger" for="input-quantity">{{ $errors->first('quantity') }}</span>
                                         @endif
                                     </div>
                                 </div>

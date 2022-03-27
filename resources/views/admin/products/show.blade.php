@@ -1,4 +1,4 @@
-@extends('layouts.main', ['activePage' => 'products', 'titlePage' => 'Detalles de Producto'])
+@extends('layouts.main', ['activePage' => 'product-management', 'titlePage' => 'Detalles de Producto'])
 @section('content')
     <div class="content">
         <div class="content-fluid">
@@ -37,11 +37,21 @@
                                                                 <table class="table">
                                                                     <thead class="text-primary text-center">
                                                                         <th>@lang('products.fields.categories.th')</th>
+                                                                        <th>@lang('products.fields.quantity.label')</th>
                                                                         <th>@lang('products.fields.publicationDate')</th>
                                                                     </thead>
                                                                     <tbody class="text-primary text-center">
                                                                             <tr>
                                                                                 <td><h3><span class="badge rounded-pill bg-success text-white">{{ $product->category->name }}</span></h3></td>
+                                                                                <td>
+                                                                                    <h3>
+                                                                                        @if ($product->quantity > 0)
+                                                                                            <span class="badge badge-primary">{{ $product->quantity }}</span>
+                                                                                        @else
+                                                                                            <span class="badge badge-danger">{{ $product->quantity }}</span>
+                                                                                        @endif
+                                                                                    </h3>
+                                                                                </td>
                                                                                 <td><h3><span class="badge rounded-pill bg-info text-white">{{ $product->created_at->format('Y/m/d') }}</span></h3></td>
                                                                             </tr>
                                                                     </tbody>
