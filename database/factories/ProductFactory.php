@@ -10,7 +10,7 @@ class ProductFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
-     * 
+     *
      * @var string
      */
     protected $model = Product::class;
@@ -26,7 +26,8 @@ class ProductFactory extends Factory
             'name'=> $this->faker->sentence(2),
             'description'=> $this->faker->sentence(20),
             'price'=> $this->faker->numberBetween(100, 2000),
-            'category_id'=> Category::all()->random()->id
+            'category_id'=> Category::factory()->create()->id,
+            'quantity'=> $this->faker->numberBetween(1, 200),
         ];
     }
 }

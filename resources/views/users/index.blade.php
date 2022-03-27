@@ -8,8 +8,8 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header card-header-primary">
-                                    <div class="card-title">Usuarios</div>
-                                    <div class="card-category">Usuarios registrados en base de datos</div>
+                                    <div class="card-title">@lang('users.titles.users')</div>
+                                    <div class="card-category">@lang('users.titles.usersInSys')</div>
                                 </div>
                                 <div class="card-body">
                                     @if (session('success'))
@@ -23,7 +23,7 @@
                                     <div class="row">
                                         <div class="col-12 text-right">
                                             @can('users.create')
-                                            <a href="{{ route('users.create') }}" class="btn btn-sm btn-primary">Crear usuario</a>
+                                            <a href="{{ route('users.create') }}" class="btn btn-sm btn-primary">@lang('users.usersCreate')</a>
                                             @endcan
                                         </div>
                                     </div>
@@ -31,12 +31,12 @@
                                         <table class="table">
                                             <thead class="text-primary">
                                                 <th>ID</th>
-                                                <th>Nombre</th>
-                                                <th>Correo</th>
-                                                <th>Username</th>
-                                                <th>Rol</th>
-                                                <th>Status</th>
-                                                <th class="text-right">Acciones</th>
+                                                <th>@lang('users.fields.name.th')</th>
+                                                <th>@lang('users.fields.email.th')</th>
+                                                <th>@lang('users.fields.username.th')</th>
+                                                <th>@lang('roles.th.role')</th>
+                                                <th>@lang('users.fields.status.status')</th>
+                                                <th class="text-right">@lang('common.actions')</th>
                                             </thead>
                                             <tbody>
                                                 @foreach ($users as $user)
@@ -55,13 +55,13 @@
                                                         @if ($user->status == 1)
                                                             <td>
                                                                 <a href="{{ route('users.change.status', $user->id) }}" class="badge badge-info">
-                                                                    <span>Activo</span>    
+                                                                    <span>@lang('users.fields.status.active')</span>    
                                                                 </a>
                                                             </td>
                                                         @else
                                                             <td>
                                                                 <a href="{{ route('users.change.status', $user->id) }}" class="badge badge-danger">
-                                                                    <span>Inactivo</span>
+                                                                    <span>@lang('users.fields.status.Inactive')</span>
                                                                 </a>  
                                                             </td>
                                                         @endif
@@ -77,7 +77,7 @@
                                                             </a>
                                                             @endcan
                                                             @can('users.destroy')
-                                                            <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display: inline-block;" onsubmit="return confirm('¿Estás seguro? se eliminará el usuario')">
+                                                            <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display: inline-block;" onsubmit="return confirm('@lang('users.messages.comfirmDeluser')')">
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <button class="btn btn-danger" type="submit" rel="tooltip">

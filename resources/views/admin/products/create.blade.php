@@ -1,4 +1,4 @@
-@extends('layouts.main', ['activePage' => 'products', 'titlePage' => 'Nuevo producto'])
+@extends('layouts.main', ['activePage' => 'product-management', 'titlePage' => 'Nuevo producto'])
 @section('content')
     <div class="content">
         <div class="container-fluid">
@@ -8,45 +8,44 @@
                         @csrf
                         <div class="card">
                             <div class="card-header card-header-primary">
-                                <h4 class="card-title">Producto</h4>
-                                <p class="card-category">Ingresar datos</p>
+                                <h4 class="card-title">@lang('products.titles.products')</h4>
+                                <p class="card-category">@lang('products.titles.enterData')</p>
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <label for="name" class="col-sm-2 col-form-label">Nombre</label>
+                                    <label for="name" class="col-sm-2 col-form-label">@lang('products.fields.name.label')</label>
                                     <div class="col-sm-7">
-                                        <input type="text" class="form-control" name="name" placeholder="Ingresa el nombre del producto" value="{{ old('name') }}" autofocus>
+                                        <input type="text" class="form-control" name="name" placeholder="@lang('products.fields.name.placeholder')" value="{{ old('name') }}" autofocus>
                                         @if ($errors->has('name'))
                                             <span class="error text-danger" for="input-name">{{ $errors->first('name') }}</span>
                                         @endif
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <label for="description" class="col-sm-2 col-form-label">Descripción del producto</label>
+                                    <label for="description" class="col-sm-2 col-form-label">@lang('products.fields.description.label')</label>
                                     <div class="col-sm-7">
-                                        <input type="text" class="form-control" name="description" placeholder="Ingresa la descripción del producto" value="{{ old('description') }}">
+                                        <input type="text" class="form-control" name="description" placeholder="@lang('products.fields.description.placeholder')" value="{{ old('description') }}">
                                         @if ($errors->has('description'))
                                             <span class="error text-danger" for="input-description">{{ $errors->first('description') }}</span>
                                         @endif
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <label for="price" class="col-sm-2 col-form-label">Precio</label>
+                                    <label for="price" class="col-sm-2 col-form-label">@lang('products.fields.price.label')</label>
                                     <div class="col-sm-7">
-                                        <input type="number" class="form-control" name="price" placeholder="Ingresa el precio" value="{{ old('price') }}">
+                                        <input type="number" class="form-control" name="price" placeholder="@lang('products.fields.price.placeholder')" value="{{ old('price') }}">
                                         @if ($errors->has('price'))
                                             <span class="error text-danger" for="input-price">{{ $errors->first('price') }}</span>
                                         @endif
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <label for="categories" class="col-sm-2 col-form-label">Categorías</label>
+                                    <label for="categories" class="col-sm-2 col-form-label">@lang('products.fields.categories.label')</label>
                                     <div class="col-sm-7">
                                         <select class="form-control" name="category_id" aria-label="Default select example">
-                                            <option value="">Escoge la categoría </option>
+                                            <option value="">@lang('products.fields.categories.option')</option>
                                             @foreach ($categories as $category)
                                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                                {{-- <p>{{ $category->name }}</p> --}}
                                             @endforeach
                                         </select>
                                         @if ($errors->has('category'))
@@ -55,7 +54,16 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <label for="image" class="col-sm-2 col-form-label">Imagen</label>
+                                    <label for="quantity" class="col-sm-2 col-form-label">@lang('products.fields.quantity.label')</label>
+                                    <div class="col-sm-7">
+                                        <input type="number" class="form-control" name="quantity" placeholder="@lang('products.fields.quantity.placeholder')" value="{{ old('quantity') }}">
+                                        @if ($errors->has('quantity'))
+                                            <span class="error text-danger" for="input-quantity">{{ $errors->first('quantity') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label for="image" class="col-sm-2 col-form-label">@lang('products.fields.image')</label>
                                     <div class="col-sm-7">
                                         <input type="file" class="form-control" name="image" value="{{ old('image') }}">
                                         @if ($errors->has('description'))
@@ -65,8 +73,8 @@
                                 </div>
                             </div>
                             <div class="card-footer ml-auto mr-auto">
-                                <button type="submit" class="btn btn-primary">Guardar</button>
-                                <a href="{{ route('admin.products.index') }}" class="btn btn-success mr-3"> Volver </a>
+                                <button type="submit" class="btn btn-primary">@lang('common.save')</button>
+                                <a href="{{ route('admin.products.index') }}" class="btn btn-success mr-3">@lang('common.return')</a>
                             </div>
                         </div>
                     </form>

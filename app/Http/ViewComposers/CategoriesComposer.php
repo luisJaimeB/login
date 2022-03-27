@@ -14,7 +14,6 @@ class CategoriesComposer {
     public function compose(View $view)
     {
         $categories = CategoryCacheService::get();
-        //dd($categories);
         $view->with('categories', $categories);
     }
 }

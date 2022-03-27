@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use phpDocumentor\Reflection\Types\Boolean;
 
 class Product extends Model
 {
@@ -17,6 +20,7 @@ class Product extends Model
         'name',
         'description',
         'price',
+        'quantity',
         'category_id',
     ];
 
@@ -35,6 +39,16 @@ class Product extends Model
         return $this->hasOne(Image::class)->latestOfMany();
     }
 
+    public function invoices(): BelongsToMany
+    {
+        return $this->belongsToMany(Invoice::class);
+    }
+
+    public function getPreviewDescriptionAttribute(): string
+    {
+        return Str::limit($this->getAttribute('description'), 60);
+    }
+
     public function scopeWhereCategory(Builder $query, int $category=null): Builder
     {
         return $query->when($category, function ($query) use ($category) {
@@ -47,5 +61,10 @@ class Product extends Model
         return $query->when($search, function ($query) use ($search) {
             $query->where('name', 'like', '%'.$search.'%');
         });
+    }
+
+    public function scopeWhereEnabled(Builder $query): Builder
+    {
+        return $query->where('status', true);
     }
 }

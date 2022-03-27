@@ -3,13 +3,14 @@
 use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProductController;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Response;
-use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\ShoppingCartController;
+use App\Http\Controllers\WelcomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,28 +30,10 @@ Route::prefix('admin')
         require_once __DIR__ . '/admin/categories.php';
     });
 
-Route::get('/images/{image}', function (string $image) {
-    if (!Storage::disk('public')->exists($image)) {
-        abort(404);
-    }
-    $path = Storage::disk('public')->path($image);
-    $file = File::get($path);
-    $type = File::mimeType($path);
-    $data = Response::make($file, 200);
-    $data->header("Content-Type", $type); 
-
-    return $data;
-})->name('images.show');
-    
-Route::get('/', function () {
-    return view('welcome');
-});
-
-
 Route::get('/home', [HomeController::class, 'index'])->middleware(['auth','verified'])->name('home');
+Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
-Route::group(['middleware' => ['auth', 'role:Admin']], function(){
-
+Route::group(['middleware' => ['auth', 'role:Admin', 'verified']], function () {
     Route::get('/users/create', [UserController::class, 'create'])
         ->name('users.create')
         ->middleware('permission:users.create');
@@ -80,8 +63,7 @@ Route::group(['middleware' => ['auth', 'role:Admin']], function(){
     Route::get('/users/{user}/changeStatusUser', [UserController::class, 'changeStatusUser'])
         ->name('users.change.status');
 
-        
-    
+
     Route::get('/roles/create', [RoleController::class, 'create'])
         ->name('roles.create')
         ->middleware('permission:roles.create');
@@ -109,16 +91,56 @@ Route::group(['middleware' => ['auth', 'role:Admin']], function(){
         ->middleware('permission:roles.destroy');
 
     Route::resource('permissions', PermissionController::class);
-    //Route::resource('admin.roles', RoleController::class);
-
 });
 
-Route::group(['middleware' => 'auth'], function(){
-    Route::get('/products', [ProductController::class, 'index'])
-        ->name('products.index');
+Route::group(['middleware' => ['auth', 'verified']], function () {
+    
+    Route::get('payments', [PaymentController::class, 'index'])
+        ->name('payments.index');
 
-    Route::get('/products/{product}', [ProductController::class, 'show'])
-        ->name('products.show');
+    Route::post('payments', [PaymentController::class, 'store'])
+        ->name('payments.store');
+
+    Route::get('payments/{reference}/retry', [PaymentController::class, 'retry'])
+        ->name('payments.retry');
+    
+    Route::get('payments/{reference}/verify', [PaymentController::class, 'verify'])
+        ->name('payments.verify');
+
+    Route::get('invoices/{invoice}', [InvoiceController::class, 'show'])
+        ->name('invoices.show');
+
+    Route::get('invoices', [InvoiceController::class, 'index'])
+        ->name('invoices.index');
+
+    Route::put('invoices/{invoice}', [PaymentController::class, 'update'])
+        ->name('invoices.update');
 });
 
+Route::get('/products', [ProductController::class, 'index'])
+    ->name('products.index');
+
+Route::get('/products/{product}', [ProductController::class, 'show'])
+    ->name('products.show');
+    
+Route::get('cart', [ShoppingCartController::class, 'index'])
+    ->name('cart.index');
+
+Route::post('cart', [ShoppingCartController::class, 'store'])
+    ->name('cart.store');
+
+Route::put('cart/{id}', [ShoppingCartController::class, 'update'])
+    ->name('cart.update');
+
+Route::delete('cart/{id}', [ShoppingCartController::class, 'remove'])
+    ->name('cart.remove');
+
+Route::delete('cart', [ShoppingCartController::class, 'destroy'])
+    ->name('cart.destroy');
+
+Route::put('cart/{rowId}/increment', [ShoppingCartController::class, 'increment'])
+    ->name('cart.increment');
+
+Route::put('cart/{rowId}/decrement', [ShoppingCartController::class, 'decrement'])
+    ->name('cart.decrement');
 

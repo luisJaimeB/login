@@ -5,8 +5,8 @@
       Tip 2: you can also add an image using data-image tag
   -->
   <div class="logo">
-    <a href="https://creative-tim.com/" class="simple-text logo-normal">
-      {{ __('Creative Tim') }}
+    <a href="{{ route('welcome') }}" class="simple-text logo-normal">
+      MERCATODO
     </a>
   </div>
   <div class="sidebar-wrapper">
@@ -20,7 +20,7 @@
       <li class="nav-item {{ ($activePage == 'profile' || $activePage == 'user-management') ? ' active' : '' }}">
         <a class="nav-link" data-toggle="collapse" href="#laravelExample" aria-expanded="true">
           <i><img style="width:25px" src="{{ asset('img/laravel.svg') }}"></i>
-          <p>{{ __('Laravel Examples') }}
+          <p>{{ __('Managment') }}
             <b class="caret"></b>
           </p>
         </a>
@@ -52,9 +52,15 @@
       </li>
       @endcan
       <li class="nav-item{{ $activePage == 'products' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('products.index') }}">
+        <a class="nav-link" href="{{ route('welcome') }}">
           <i class="material-icons">storefront</i>
-            <p>{{ __('Products') }}</p>
+            <p>@lang('products.titles.products')</p>
+        </a>
+      </li>
+      <li class="nav-item{{ $activePage == 'invoices' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('invoices.index') }}">
+          <i class="material-icons">receipt</i>
+            <p>@lang('invoices.titles.invoices')</p>
         </a>
       </li>
       @can('permissions.index')
@@ -69,7 +75,7 @@
       <li class="nav-item{{ $activePage == 'roles' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('roles.index') }}">
           <i class="material-icons">location_ons</i>
-            <p>{{ __('Roles') }}</p>
+            <p>@lang('roles.titles.roles')</p>
         </a>
       </li>
       @endcan
@@ -77,22 +83,17 @@
       <li class="nav-item{{ $activePage == 'categories' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('admin.categories.index') }}">
           <i class="material-icons">category</i>
-          <p>{{ __('Categories') }}</p>
+          <p>@lang('products.fields.categories.label')</p>
         </a>
       </li>
       @endcan
       <li class="nav-item{{ $activePage == 'language' ? ' active' : '' }}">
         <a class="nav-link" href="#">
           <i class="material-icons">language</i>
-          <p>{{ __('RTL Support') }}</p>
+          <p></p>
         </a>
       </li>
-      {{-- <li class="nav-item active-pro{{ $activePage == 'upgrade' ? ' active' : '' }}">
-        <a class="nav-link text-white bg-danger" href="#">
-          <i class="material-icons text-white">unarchive</i>
-          <p>{{ __('Upgrade to PRO') }}</p>
-        </a>
-      </li> --}}
+      </li>
     </ul>
   </div>
 </div>

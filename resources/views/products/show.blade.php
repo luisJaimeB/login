@@ -1,66 +1,66 @@
-@extends('layouts.main', ['activePage' => 'products', 'titlePage' => 'Detalles de Producto'])
+@extends('layouts.app')
 @section('content')
     <div class="content">
-        <div class="content-fluid">
+        <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header card-header-primary">
-                            <div class="card-title">Productos</div>
-                            <p class="card-category">Detalles del Producto <strong>{{ $product->name }}</strong></p>
+                            <div class="card-title">@lang('products.titles.products')</div>
+                            <p class="card-category">@lang('products.titles.detailProd')<strong> {{ $product->name }}</strong></p>
                         </div>
 
                         <div class="card-body">
                             <div class="row d-flex justify-content-center">
-                                <div class="col-md-4">
-                                    <div class="card card-user">
-                                        <div class="card-body">
-                                            @if (session('success'))
-                                                <div class="alert alert-success" role="success">
-                                                    {{ session('success') }}
-                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>    
-                                            @endif
-                                            <p class="card-text">
-                                                <div class="author">
-                                                    <a href="#" class="">
-                                                        <h5 class="title mx-3">{{ $product->name }}</h5>
-                                                        <img class="card-img-top" src="{{ route('images.show', ['image' => $product->image->path]) }}" alt="Card image cap">
-                                                        
-                                                    </a>
-                                                    <p class="description">
-                                                        <h3>{{ $product->name }}</h3><br>
-                                                        <div class="row">     
-                                                            <div class="table-responsive">
-                                                                <table class="table">
-                                                                    <thead class="text-primary text-center">
-                                                                        <th>Categoría</th>
-                                                                        <th>Fecha de publicación</th>
-                                                                    </thead>
-                                                                    <tbody class="text-primary text-center">
-                                                                            <tr>
-                                                                                <td><h3><span class="badge rounded-pill bg-success text-white">{{ $product->category->name }}</span></h3></td>
-                                                                                <td><h3><span class="badge rounded-pill bg-info text-white">{{ $product->created_at->format('Y/m/d') }}</span></h3></td>
-                                                                            </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                        </div> 
-                                                        <label for="description">Descripción</label><br>
-                                                        <p>{{ $product->description }}</p><br>          
-                                                    </p>
-                                                </div>
-                                            </p>
-                                           {{--  <div class="card-description">
-                                                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit voluptate earum cupiditate officia quisquam vero non laboriosam expedita voluptatem accusantium incidunt impedit beatae maiores quam neque, doloribus nesciunt? Accusamus, aliquid. 
-                                            </div> --}}
-                                        </div>
-                                        <div class="card-footer d-flex justify-content-center">
-                                            <div class="button-container">
-                                                <a href="{{ route('products.index') }}" class="btn btn-sm btn-success mr-3"> Volver </a>                                                
+                                <div class="col-10">
+                                    {{-- CardNueva --}}
+                                    <div class="card mb-3">
+                                        <div class="row g-0">
+                                          <div class="col-md-6">
+                                            <img class="card-img-top h-100" src="{{ $product->image->path_url }}" alt="Card image cap">
+                                          </div>
+                                          <div class="col-md-6">
+                                            <div class="card-body">
+                                              <h5 class="card-title"><strong>{{ $product->name }}</strong></h5>
+                                              <p class="card-text">{{ $product->description }}</p>
+                                              <p class="card-text">
+                                                <small class="text-muted">
+                                                    <h4><span class="badge rounded-pill bg-secondary text-white">{{ $product->category->name }}</span></h4>
+                                                    <div class="input-group mb-3">
+                                                        <span class="input-group-text">$</span>
+                                                        <span>{{ $product->price }}</span>
+                                                    </div>
+                                                </small>
+                                              </p>
                                             </div>
+                                            <div class="card-footer d-flex justify-content-center">
+                                                <div class="button-container">
+                                                    <form id="add-cart-{{ $product->id }}" action="{{ route('cart.store') }}" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" name="id" value="{{ $product->id }}">
+                                                        @if ($product->quantity > 0)
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <input type="number" class="form-control" name="quantity" value="1" min="1" max="{{ $product->quantity }}">
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <p class="text-muted">
+                                                                    ( {{ $product->quantity }} @lang('products.messages.maxProductBuy'))
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        @else
+                                                            <span class="badge badge-danger">@lang('products.titles.Outstock')</span>
+                                                        @endif
+                                                    </form>
+                                                    <a href="{{ route('products.index') }}" class="btn btn-sm btn-success mr-3">@lang('common.return')</a>
+                                                    @if ($product->quantity > 0)
+                                                        <button type="button" type="submit" form="add-cart-{{ $product->id }}" class="btn btn-sm btn-primary">@lang('common.addtocart')</button>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                          </div>
                                         </div>
                                     </div>
                                 </div>

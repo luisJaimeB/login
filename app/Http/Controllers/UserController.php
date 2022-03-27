@@ -10,13 +10,14 @@ use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\UserEditRequest;
 use Illuminate\Auth\Events\Registered;
 use App\Http\Requests\UserCreateRequest;
+use Illuminate\Http\RedirectResponse;
 
 class UserController extends Controller
 {
     public function index(): View
     {
         $users = User::paginate(3);
-        
+
         return view('users.index', compact('users'));
     }
 
@@ -28,7 +29,7 @@ class UserController extends Controller
     }
 
 
-    public function store(UserCreateRequest $request)
+    public function store(UserCreateRequest $request):RedirectResponse
     {
         $user = User::create($request->only('name', 'username', 'email') + [
             'password' => bcrypt($request->input('password'))
@@ -53,18 +54,19 @@ class UserController extends Controller
     {
         $roles = Role::all()->pluck('name', 'id');
         $user->load('roles');
-        
+
         return view('users.edit', compact('user', 'roles'));
     }
 
 
-    public function update(UserEditRequest $request, User $user)
-    {    
+    public function update(UserEditRequest $request, User $user): RedirectResponse
+    {
         $data = $request->only('name', 'username', 'email');
         $password = $request->input('password');
-        if($password)
+        if ($password) {
             $data['password'] = bcrypt($password);
-        
+        }
+
         $user->update($data);
         $roles = $request->input('roles', []);
         $user->syncRoles($roles);
@@ -72,7 +74,7 @@ class UserController extends Controller
     }
 
 
-    public function destroy(User $user)
+    public function destroy(User $user):RedirectResponse
     {
         if (auth()->user()->id == $user->id) {
             return redirect()->route('users.index');
@@ -82,9 +84,8 @@ class UserController extends Controller
         return back()->with('success', 'Usuario eliminado correctamente');
     }
 
-    public function changeStatusUser(User $user)
+    public function changeStatusUser(User $user): RedirectResponse
     {
-        
         $user->status = !$user->status;
         $user->save();
 

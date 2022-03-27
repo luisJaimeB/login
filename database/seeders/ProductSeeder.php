@@ -17,11 +17,9 @@ class ProductSeeder extends Seeder
     {
         Product::factory()->count(50)->create()
             ->each(function (Product $product) {
-               Image::factory()->create([
+                Image::factory()->create([
                     'product_id' => $product->id
                 ]);
-
-                //dd($ddfacrory);
             });
     }
 }

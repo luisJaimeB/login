@@ -12,20 +12,6 @@
     </button>
     <div class="collapse navbar-collapse justify-content-end">
       <form class="navbar-form">
-        <div class="input-group no-border mr-5">
-          <select class="form-control" name="category_id" aria-label="Default select example" required>
-            <option value="">Filtra por categoría... </option>
-            @foreach ($categories as $category)
-              <option value="{{ $category->id }}"  @if(request('category_id') == $category->id) selected @endif>{{ $category->name }}</option>
-            @endforeach
-          </select>
-          <button type="submit" class="btn btn-white btn-round btn-just-icon">
-            <i class="fas fa-filter"></i>
-            <div class="ripple-container"></div>
-          </button>
-        </div>
-      </form>
-      <form class="navbar-form">
         <div class="input-group no-border">
         <input type="search" name="search" value="{{ request('search') }}" class="form-control" placeholder="Search by Name..." required>
         <button type="submit" class="btn btn-white btn-round btn-just-icon">
