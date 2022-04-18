@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Actions\CreateInvoiceAction;
 use App\Actions\PaymentRedirectionAction;
 use App\Actions\UpdateUserAction;
-use App\Actions\VerifyPaymentStatus;
+use App\Actions\VerifyPaymentStatusAction;
 use App\Constants\PaymentStatus;
 use App\Models\Invoice;
 use Illuminate\View\View;
@@ -48,7 +48,7 @@ class PaymentController extends Controller
             ->where('invoice_status', PaymentStatus::PENDING)
             ->firstOrFail();
     
-        VerifyPaymentStatus::execute($webCheckout, $invoice);
+            VerifyPaymentStatusAction::execute($webCheckout, $invoice);
 
         return redirect()->route('invoices.show', $invoice);
     }

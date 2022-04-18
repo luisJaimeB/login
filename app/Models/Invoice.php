@@ -39,4 +39,9 @@ class Invoice extends Model
         return empty($this->attributes['request_id'])
             || in_array($this->attributes['invoice_status'], [InvoiceStatus::PENDING, InvoiceStatus::CANCELED]);
     }
+
+    public function isPaid(): bool  
+    {   
+        return $this->attributes['invoice_status'] === InvoiceStatus::PAID;
+    }
 }
