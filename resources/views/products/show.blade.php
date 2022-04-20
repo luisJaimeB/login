@@ -17,7 +17,11 @@
                                     <div class="card mb-3">
                                         <div class="row g-0">
                                           <div class="col-md-6">
-                                            <img class="card-img-top h-100" src="{{ $product->image->path_url }}" alt="Card image cap">
+                                            @empty($product->image)
+                                                <img class="card-img-top" src="{{ asset('img/default.jpg') }}" alt="Card image cap">
+                                                @else
+                                                    <img class="card-img-top" src="{{ $product->image->path_url }}" alt="Card image cap">
+                                            @endempty
                                           </div>
                                           <div class="col-md-6">
                                             <div class="card-body">

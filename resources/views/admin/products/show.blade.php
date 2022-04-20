@@ -27,8 +27,11 @@
                                                 <div class="author">
                                                     <a href="#" class="">
                                                         <h5 class="title mx-3">{{ $product->name }}</h5>
-                                                        <img class="card-img-top" src="{{ $product->image->path_url }}" alt="Card image cap">
-                                                        
+                                                        @empty($product->image)
+                                                            <img class="card-img-top" src="{{ asset('img/default.jpg') }}" alt="Card image cap">
+                                                            @else
+                                                            <img class="card-img-top" src="{{ $product->image->path_url }}" alt="Card image cap">
+                                                        @endempty
                                                     </a>
                                                     <p class="description">
                                                         <h3>{{ $product->name }}</h3><br>

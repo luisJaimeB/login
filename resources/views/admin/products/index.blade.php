@@ -21,9 +21,9 @@
                                         </div>    
                                     @endif
                                     <div class="row">
-                                        {{-- <div class="text-right">
+                                        <div class="text-right">
                                             <a href="{{ route('admin.export.products') }}" class="btn btn-sm btn-warning">@lang('common.export')</a>
-                                        </div> --}}
+                                        </div>
                                         <div class="text-right">
                                             <a href="{{ route('admin.import.products.create') }}" class="btn btn-sm btn-success">@lang('common.import')</a>
                                         </div>

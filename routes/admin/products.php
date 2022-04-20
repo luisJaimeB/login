@@ -44,4 +44,4 @@ Route::post('import/products', [ProductImportController::class, 'store'])
     ->name('import.products.store')
     ->middleware('auth', 'role:Admin', 'verified');
 
-/* Route::get('export/products', [ProductExportController::class, 'export'])->name('export.products'); */
+Route::get('export/products', [ProductExportController::class, 'export'])->name('export.products');

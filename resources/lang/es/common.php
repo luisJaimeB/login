@@ -12,6 +12,7 @@ return [
     'see' => 'ver',
     'cart' => 'Carrito',
     'add' => 'Añadir',
+    'addtocart' => 'Añadir al carrito',
     'emptyCart' => 'Vaciar carrito',
     'pay' => 'Pagar',
     'verify' => 'Verificar',
