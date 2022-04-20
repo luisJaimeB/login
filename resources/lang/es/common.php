@@ -1,7 +1,6 @@
 <?php
 
 return [
-    '' => '',
     'create' => 'Crear',
     'save' => 'Guardar',
     'return' => 'Atrás',
@@ -18,7 +17,10 @@ return [
     'verify' => 'Verificar',
     'subtotal' => 'Subtotal',
     'total' => 'Total',
+    'import' => 'Importar',
     'date' => 'Fecha',
+    'file' => 'Archivo',
+    'export' => 'Exportar',
 
     'messages' => [
         'buying' => 'Comprando en :app'

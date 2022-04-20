@@ -17,7 +17,10 @@ return [
     'verify' => 'Verify',
     'subtotal' => 'subtotal',
     'total' => 'Total',
+    'import' => 'Import',
     'date' => 'Date',
+    'file' => 'File',
+    'export' => 'Export',
 
     'messages' => [
         'buying' => 'Shopping on :app'

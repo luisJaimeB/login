@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ProductExportController;
+use App\Http\Controllers\Admin\ProductImportController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('products', [ProductController::class, 'index'])
@@ -33,3 +35,13 @@ Route::delete('/products/{product}', [ProductController::class, 'destroy'])
 
 Route::get('/products/{product}/changeStatusProduct', [ProductController::class, 'changeStatusProduct'])
     ->name('products.change.status');
+
+Route::get('import/products/create', [ProductImportController::class, 'create'])
+    ->name('import.products.create')
+    ->middleware('auth', 'role:Admin', 'verified');
+
+Route::post('import/products', [ProductImportController::class, 'store'])
+    ->name('import.products.store')
+    ->middleware('auth', 'role:Admin', 'verified');
+
+/* Route::get('export/products', [ProductExportController::class, 'export'])->name('export.products'); */
