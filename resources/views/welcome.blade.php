@@ -16,7 +16,11 @@
             @foreach ($chunk as $product)
             <div class="col-12 col-sm-12 col-md-6 col-lg-3">
                 <div class="card mb-4">
-                    <img class="card-img-top" src="{{ $product->image->path_url }}" alt="Card image cap">
+                    @empty($product->image)
+                        <img class="card-img-top" src="{{ asset('img/default.jpg') }}" alt="Card image cap">
+                        @else
+                        <img class="card-img-top" src="{{ $product->image->path_url }}" alt="Card image cap">
+                    @endempty
                     <div class="card-body">
                         <p class="card-text">{{$product->name}}</p>
                         <p class="card-text">{{ $product->preview_description }}</p>
