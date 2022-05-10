@@ -28,6 +28,7 @@ Route::prefix('admin')
     ->group(function () {
         require_once __DIR__ . '/admin/products.php';
         require_once __DIR__ . '/admin/categories.php';
+        require_once __DIR__ . '/admin/invoices.php';
     });
 
 Route::get('/home', [HomeController::class, 'index'])->middleware(['auth','verified'])->name('home');
@@ -112,6 +113,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     Route::get('invoices', [InvoiceController::class, 'index'])
         ->name('invoices.index');
+    
+    Route::get('invoices/download/{invoice}', [InvoiceController::class, 'download'])
+        ->name('invoices.download');
 
     Route::put('invoices/{invoice}', [PaymentController::class, 'update'])
         ->name('invoices.update');

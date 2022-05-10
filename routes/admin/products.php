@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductExportController;
 use App\Http\Controllers\Admin\ProductImportController;
+use App\Http\Controllers\Admin\ProductPdfController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('products', [ProductController::class, 'index'])
@@ -44,4 +45,11 @@ Route::post('import/products', [ProductImportController::class, 'store'])
     ->name('import.products.store')
     ->middleware('auth', 'role:Admin', 'verified');
 
-Route::get('export/products', [ProductExportController::class, 'export'])->name('export.products');
+Route::get('export/products', [ProductExportController::class, 'export'])
+    ->name('export.products');
+
+Route::get('report/products/create', [ProductPdfController::class, 'create'])
+    ->name('report.products.create');
+
+Route::get('report/products', [ProductPdfController::class, 'index'])
+    ->name('report.products');
