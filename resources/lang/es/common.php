@@ -22,6 +22,9 @@ return [
     'date' => 'Fecha',
     'file' => 'Archivo',
     'export' => 'Exportar',
+    'reports' => 'Reportes',
+    'createReport' => 'Crear reporte',
+    'print' => 'Imprimir',
 
     'messages' => [
         'buying' => 'Comprando en :app'

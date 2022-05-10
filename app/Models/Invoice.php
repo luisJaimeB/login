@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\Constants\InvoiceStatus;
 use App\Constants\PaymentStatus;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -43,5 +45,18 @@ class Invoice extends Model
     public function isPaid(): bool  
     {   
         return $this->attributes['invoice_status'] === InvoiceStatus::PAID;
+    }
+
+    public function scopeWhereBetweenDate(Builder $query, string $startDate, string $endDate): Builder
+    {
+        return $query->whereBetween('created_at', [
+            Carbon::parse($startDate)->startOfDay(), 
+            Carbon::parse($endDate)->endOfDay(),
+        ]);
+    }
+
+    public function scopeHisInvoices(Builder $query, string $id): Builder
+    {
+        return $query->where('user_id', $id);
     }
 }

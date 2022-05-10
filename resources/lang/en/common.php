@@ -22,6 +22,9 @@ return [
     'date' => 'Date',
     'file' => 'File',
     'export' => 'Export',
+    'reports' => 'Reports',
+    'createReport' => 'Create report',
+    'print' => 'Print',
 
     'messages' => [
         'buying' => 'Shopping on :app'
