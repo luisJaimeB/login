@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
@@ -66,5 +67,13 @@ class Product extends Model
     public function scopeWhereEnabled(Builder $query): Builder
     {
         return $query->where('status', true);
+    }
+
+    public function scopeWhereBetweenDate(Builder $query, string $startDate, string $endDate): Builder
+    {
+        return $query->whereBetween('created_at', [
+            Carbon::parse($startDate)->startOfDay(), 
+            Carbon::parse($endDate)->endOfDay(),
+        ]);
     }
 }

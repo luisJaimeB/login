@@ -21,15 +21,15 @@
                                         </div>    
                                     @endif
                                     <div class="row">
-                                        <div class="text-right">
-                                            <a href="{{ route('admin.export.products') }}" class="btn btn-sm btn-warning">@lang('common.export')</a>
+                                        <div class="col-md-7">
+
                                         </div>
-                                        <div class="text-right">
-                                            <a href="{{ route('admin.import.products.create') }}" class="btn btn-sm btn-success">@lang('common.import')</a>
-                                        </div>
-                                        <div class="text-right">
+                                        <div class="col-md-5">
+                                            <a href="{{ route('admin.report.products.create') }}" class="btn btn-sm btn-info">@lang('common.reports') <i class="fas fa-file-pdf"></i></a>
+                                            <a href="{{ route('admin.export.products') }}" class="btn btn-sm btn-warning">@lang('common.export') <i class="fas fa-file-export"></i></a>
+                                            <a href="{{ route('admin.import.products.create') }}" class="btn btn-sm btn-success">@lang('common.import') <i class="fas fa-file-import"></i></a>
                                             @can('admin.products.create')
-                                            <a href="{{ route('admin.products.create') }}" class="btn btn-sm btn-primary">@lang('products.productsCreate')</a>
+                                            <a href="{{ route('admin.products.create') }}" class="btn btn-sm btn-primary">@lang('products.productsCreate') <i class="fas fa-plus"></i></a>
                                             @endcan
                                         </div>
                                     </div>

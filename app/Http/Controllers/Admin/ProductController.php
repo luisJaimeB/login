@@ -101,7 +101,7 @@ class ProductController extends Controller
         $image = $product->images->first();
 
 
-        if (Storage::disk('public')->exists($image->path)) {
+        if ($image and Storage::disk('public')->exists($image->path)) {
             Storage::disk('public')->delete($image->path);
         }
         $image->delete();
