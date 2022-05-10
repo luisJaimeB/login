@@ -69,6 +69,9 @@
                                                 <div class="col-md-3  mr-3">
                                                     <a href="{{ route('invoices.index') }}" class="btn btn-success">@lang('common.return')</a>
                                                 </div>
+                                                <div class="col-md-3  mr-3">
+                                                    <a href="{{ route('invoices.download', $invoice) }}" class="btn btn-info">@lang('common.print')</a>
+                                                </div>
                                                 <div class="col-md-8">
                                                     <div class="row">
                                                         @if ($invoice->isPending())
