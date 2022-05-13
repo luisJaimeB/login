@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ImportController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductExportController;
 use App\Http\Controllers\Admin\ProductImportController;
@@ -44,6 +45,20 @@ Route::get('import/products/create', [ProductImportController::class, 'create'])
 Route::post('import/products', [ProductImportController::class, 'store'])
     ->name('import.products.store')
     ->middleware('auth', 'role:Admin', 'verified');
+
+
+Route::delete('/imports/{import}', [ImportController::class, 'destroy'])
+    ->name('imports.destroy')
+    ->middleware(['auth', 'role:Admin', 'verified']);
+
+Route::get('/imports/{import}', [ImportController::class, 'show'])
+    ->name('imports.show')
+    ->middleware('auth', 'role:Admin', 'verified');
+    
+Route::get('imports', [ImportController::class, 'index'])
+    ->name('imports.index')
+    ->middleware('auth', 'role:Admin', 'verified');
+
 
 Route::get('export/products', [ProductExportController::class, 'export'])
     ->name('export.products');

@@ -19,6 +19,7 @@ return [
     'subtotal' => 'subtotal',
     'total' => 'Total',
     'import' => 'Import',
+    'imports' => 'Imports',
     'date' => 'Date',
     'file' => 'File',
     'export' => 'Export',

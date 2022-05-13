@@ -22,14 +22,15 @@ class ImageFactory extends Factory
      */
     public function definition()
     {
-        $image = $this->faker->image();
+        $image = $this->faker->image(public_path());
         $fileName = explode(DIRECTORY_SEPARATOR, $image);
         $fileName = array_pop($fileName);
         $image = new UploadedFile($image, $fileName);
         $image->storeAs('public', $fileName);
 
         return [
-            'path' => $fileName,
+            /* 'path' => $fileName, */
+            'path' => 'img',
         ];
     }
 }
