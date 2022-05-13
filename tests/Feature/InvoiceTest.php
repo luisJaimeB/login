@@ -15,7 +15,7 @@ class InvoiceTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function authorized_user_can_access_to_purchace_history ()
+    public function authorized_user_can_access_to_purchace_history()
     {
         $this->seed([RoleSeeder::class, PermissionSeeder::class]);
 
@@ -30,10 +30,10 @@ class InvoiceTest extends TestCase
     }
 
     /** @test */
-    public function unauthorized_user_can_not_access_to_purchace_history ()
+    public function unauthorized_user_can_not_access_to_purchace_history()
     {
         $this->seed([RoleSeeder::class, PermissionSeeder::class]);
-        
+
         /** @var \App\Models\User $user */
         $user = User::factory()->create();
 

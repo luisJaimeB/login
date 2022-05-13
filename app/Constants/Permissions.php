@@ -2,8 +2,7 @@
 
 namespace App\Constants;
 
-
-class Permissions 
+class Permissions
 {
     public const ROLES_INDEX = 'roles.index';
     public const ROLES_CREATE = 'roles.create';
@@ -30,7 +29,7 @@ class Permissions
 
     public const ADMIN_INVOICES_INDEX = 'admin.invoices.index';
     public const INVOICES_INDEX = 'invoices.index';
-    
+
     public static function toArray(): array
     {
         return [
@@ -54,9 +53,8 @@ class Permissions
             self::ADMIN_PRODUCTS_EDIT,
             self::ADMIN_PRODUCTS_DESTROY,
             self::ADMIN_INVOICES_INDEX,
-            
-        ];
 
+        ];
     }
 
     public static function permissionToAdmin(): array
@@ -92,5 +90,4 @@ class Permissions
             self::INVOICES_INDEX,
         ];
     }
-
 };

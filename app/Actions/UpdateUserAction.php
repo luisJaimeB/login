@@ -2,7 +2,6 @@
 
 namespace App\Actions;
 
-
 use Illuminate\Support\Facades\Auth;
 
 class UpdateUserAction

@@ -54,7 +54,7 @@ Route::delete('/imports/{import}', [ImportController::class, 'destroy'])
 Route::get('/imports/{import}', [ImportController::class, 'show'])
     ->name('imports.show')
     ->middleware('auth', 'role:Admin', 'verified');
-    
+
 Route::get('imports', [ImportController::class, 'index'])
     ->name('imports.index')
     ->middleware('auth', 'role:Admin', 'verified');

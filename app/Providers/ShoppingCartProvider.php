@@ -25,7 +25,7 @@ class ShoppingCartProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->composer("*", function($view){
+        view()->composer("*", function ($view) {
             $sessionName = 'shoppingCartId';
             $shoppingCartId = Session::get($sessionName);
             $shoppingCart = ShoppingCart::finOrCreateBySessionId($shoppingCartId);

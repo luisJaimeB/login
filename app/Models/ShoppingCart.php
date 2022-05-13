@@ -34,6 +34,5 @@ class ShoppingCart extends Model
         } else {
             return ShoppingCart::create();
         }
-        
     }
 }

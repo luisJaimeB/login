@@ -19,9 +19,9 @@ class ProductImportController extends Controller
         return view('admin.products.imports.index', compact('imports'));
     }
 
-    public function create():View
+    public function create(): View
     {
-        return view('admin.products.imports.create'); 
+        return view('admin.products.imports.create');
     }
 
     public function store(StoreImportRequest $request)
@@ -32,7 +32,7 @@ class ProductImportController extends Controller
             'file_name' => $file->getClientOriginalName(),
             'import_type' => ImportType::PRODUCTS,
         ]);
-        
+
         Excel::import(new ProductsImport($import), $file);
 
         return redirect()->route('admin.products.index')->with('success', 'Su importe está siendo procesado.');

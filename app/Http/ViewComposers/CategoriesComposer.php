@@ -1,10 +1,12 @@
-<?php 
+<?php
+
 namespace App\Http\ViewComposers;
 
 use App\Services\CategoryCacheService;
 use Illuminate\View\View;
 
-class CategoriesComposer {
+class CategoriesComposer
+{
     /**
      * Bind data to the view.
      *

@@ -52,7 +52,7 @@ class WebCheckoutService implements WebcheckoutContract
     private function request(array $data, string $url)
     {
         $response = Http::post($url, $data);
-        
+
         return $response->json();
     }
 }

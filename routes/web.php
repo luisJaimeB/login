@@ -95,7 +95,6 @@ Route::group(['middleware' => ['auth', 'role:Admin', 'verified']], function () {
 });
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
-    
     Route::get('payments', [PaymentController::class, 'index'])
         ->name('payments.index');
 
@@ -104,7 +103,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     Route::get('payments/{reference}/retry', [PaymentController::class, 'retry'])
         ->name('payments.retry');
-    
+
     Route::get('payments/{reference}/verify', [PaymentController::class, 'verify'])
         ->name('payments.verify');
 
@@ -113,7 +112,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     Route::get('invoices', [InvoiceController::class, 'index'])
         ->name('invoices.index');
-    
+
     Route::get('invoices/download/{invoice}', [InvoiceController::class, 'download'])
         ->name('invoices.download');
 
@@ -126,7 +125,7 @@ Route::get('/products', [ProductController::class, 'index'])
 
 Route::get('/products/{product}', [ProductController::class, 'show'])
     ->name('products.show');
-    
+
 Route::get('cart', [ShoppingCartController::class, 'index'])
     ->name('cart.index');
 
@@ -147,4 +146,3 @@ Route::put('cart/{rowId}/increment', [ShoppingCartController::class, 'increment'
 
 Route::put('cart/{rowId}/decrement', [ShoppingCartController::class, 'decrement'])
     ->name('cart.decrement');
-

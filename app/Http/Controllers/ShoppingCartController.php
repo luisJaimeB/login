@@ -65,7 +65,7 @@ class ShoppingCartController extends Controller
             $qty++;
         }
 
-        Cart::update($rowId,['qty' => $qty]);
+        Cart::update($rowId, ['qty' => $qty]);
 
         return response()->json(['qty' => $qty]);
     }
@@ -79,7 +79,7 @@ class ShoppingCartController extends Controller
             $qty--;
         }
 
-        Cart::update($rowId,['qty' => $qty]);
+        Cart::update($rowId, ['qty' => $qty]);
 
         return response()->json(['qty' => $qty]);
     }

@@ -27,12 +27,11 @@ class InvoicePdfController extends Controller
         $invoices = Invoice::whereBetweenDate($request->query('start_date'), $request->query('end_date'))->get();
 
         $view = view('admin.reports.invoices.invoicesReport', compact('invoices'))->render();
-        
+
         $pdf = SnappyPdf::loadHTML($view);
-        
+
         return $pdf->inline();
 
         /* return view('admin.reports.report', compact('invoices'))->render(); */
-        
     }
 }

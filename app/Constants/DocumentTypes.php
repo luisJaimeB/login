@@ -2,8 +2,7 @@
 
 namespace App\Constants;
 
-
-class DocumentTypes 
+class DocumentTypes
 {
     public const CC = 'CC';
     public const CE = 'CE';
@@ -14,7 +13,5 @@ class DocumentTypes
             self::CC,
             self::CE,
         ];
-
     }
-
 };

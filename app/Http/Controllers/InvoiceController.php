@@ -14,7 +14,7 @@ class InvoiceController extends Controller
     {
         $invoices = Invoice::hisInvoices(Auth::id())->paginate(config('settings.pagination'));
 
-        return view('invoices.index', compact('invoices'));   
+        return view('invoices.index', compact('invoices'));
     }
 
     public function show(Invoice $invoice): View
@@ -29,9 +29,9 @@ class InvoiceController extends Controller
         $invoice->load('products');
 
         $view = view('invoices.downloadInvoice', compact('invoice'))->render();
-        
+
         $pdf = SnappyPdf::loadHTML($view);
-        
+
         return $pdf->inline();
     }
 }

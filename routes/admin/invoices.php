@@ -14,7 +14,7 @@ Route::get('invoices', [InvoiceController::class, 'index'])
 Route::put('invoices/{invoice}', [PaymentController::class, 'update'])
         ->name('invoices.update');
 
-        
+
 Route::get('report/invoices/create', [InvoicePdfController::class, 'create'])
     ->name('report.invoices.create');
 

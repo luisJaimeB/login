@@ -72,7 +72,7 @@ class Product extends Model
     public function scopeWhereBetweenDate(Builder $query, string $startDate, string $endDate): Builder
     {
         return $query->whereBetween('created_at', [
-            Carbon::parse($startDate)->startOfDay(), 
+            Carbon::parse($startDate)->startOfDay(),
             Carbon::parse($endDate)->endOfDay(),
         ]);
     }

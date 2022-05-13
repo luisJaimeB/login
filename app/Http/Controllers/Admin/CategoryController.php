@@ -50,7 +50,7 @@ class CategoryController extends Controller
 
         return redirect()->route('admin.categories.index')->with('success', 'categoría actualizada correctamente');
     }
-    
+
 
     public function destroy(Category $category): RedirectResponse
     {

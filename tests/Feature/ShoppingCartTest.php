@@ -13,7 +13,7 @@ class ShoppingCartTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function get_balance (): void
+    public function get_balance(): void
     {
         /** @var \App\Models\Product $product */
         $product = Product::factory()->create();

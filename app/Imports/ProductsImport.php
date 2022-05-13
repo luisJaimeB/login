@@ -52,7 +52,7 @@ class ProductsImport implements ToModel, WithHeadingRow, WithBatchInserts, WithC
             'status' => $row['status'],
         ]);
     }
-    
+
     public function batchSize(): int
     {
         return 1000;
@@ -74,7 +74,7 @@ class ProductsImport implements ToModel, WithHeadingRow, WithBatchInserts, WithC
 
         foreach ($failures as $failure) {
             $errors->push([
-                    'row' => $failure->row(), 
+                    'row' => $failure->row(),
                     'attribute' => $failure->attribute(),
                     'errors' => $failure->errors(),
                     'values' => $failure->values(),
@@ -90,18 +90,18 @@ class ProductsImport implements ToModel, WithHeadingRow, WithBatchInserts, WithC
     public function registerEvents(): array
     {
         return [
-            BeforeImport::class => function(BeforeImport $event) {
+            BeforeImport::class => function (BeforeImport $event) {
                 $this->import->update(['import_status' => ImportStatus::PROCESSING]);
                 Log::channel('imports')->info('processing');
             },
-            AfterImport::class => function(AfterImport $event) {
+            AfterImport::class => function (AfterImport $event) {
                 $this->import->refresh();
                 if (!$this->import->completeWithErrors()) {
                     $this->import->update(['import_status' => ImportStatus::COMPLETE]);
                 }
                 Log::channel('imports')->info('complete');
             },
-            ImportFailed::class => function (ImportFailed $event){
+            ImportFailed::class => function (ImportFailed $event) {
                 $this->import->update(['import_status' => ImportStatus::FAILED]);
                 Log::channel('imports')->info('fail');
             }

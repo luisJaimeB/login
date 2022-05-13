@@ -24,7 +24,7 @@ class CreateSessionRequest extends GetInformationRequest
 
     public function toArray()
     {
-        return array_merge(parent::auth(),[
+        return array_merge(parent::auth(), [
             'payment' => $this->payment,
             'expiration' => $this->expiration,
             'returnUrl' => $this->returnUrl,
