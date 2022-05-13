@@ -22,7 +22,7 @@
                                     @endif
                                     <div class="row">
                                         <div class="col-md-7">
-
+                                            <a href="{{ route('admin.imports.index') }}" class="btn btn-sm btn-success">@lang('common.imports')</a>
                                         </div>
                                         <div class="col-md-5">
                                             <a href="{{ route('admin.report.products.create') }}" class="btn btn-sm btn-info">@lang('common.reports') <i class="fas fa-file-pdf"></i></a>
