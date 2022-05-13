@@ -66,9 +66,16 @@
                                                 </table>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-3  mr-3">
-                                                    <a href="{{ route('invoices.index') }}" class="btn btn-success">@lang('common.return')</a>
-                                                </div>
+                                                @can('invoices.index')    
+                                                    <div class="col-md-3  mr-3">
+                                                        <a href="{{ route('invoices.index') }}" class="btn btn-success">@lang('common.return')</a>
+                                                    </div>
+                                                @endcan
+                                                @can('admin.invoices.index')    
+                                                    <div class="col-md-3  mr-3">
+                                                        <a href="{{ route('admin.invoices.index') }}" class="btn btn-success">@lang('common.return')</a>
+                                                    </div>
+                                                @endcan
                                                 <div class="col-md-3  mr-3">
                                                     <a href="{{ route('invoices.download', $invoice) }}" class="btn btn-info">@lang('common.print')</a>
                                                 </div>
