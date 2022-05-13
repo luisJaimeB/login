@@ -23,10 +23,10 @@
                                               </button>
                                         </div>    
                                     @endif
-                                    <label for="impot_file" class="col-sm-2 col-form-label">@lang('common.file')</label>
+                                    <label for="import_file" class="col-sm-2 col-form-label">@lang('common.file')</label>
                                     <div class="col-sm-7">
-                                        <input type="file" class="form-control" name="impot_file" autofocus>
-                                            <span class="error text-danger" for="impot_file">{{ $errors->first('impot_file') }}</span>
+                                        <input type="file" class="form-control" name="import_file" autofocus>
+                                            <span class="error text-danger" for="impot_file">{{ $errors->first('import_file') }}</span>
                                     </div>
                                 </div>
                             </div>
