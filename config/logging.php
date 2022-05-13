@@ -118,6 +118,10 @@ return [
             'driver' => 'single',
             'path' => storage_path('logs/payments.log'),
         ],
+        'imports' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/imports.log'),
+        ],
     ],
 
 ];
