@@ -18,7 +18,7 @@ class VerifyPaymentStatusAction
 
         if ($status && PaymentStatus::completed($status)) {
             $invoice->invoice_status = InvoiceStatus::STATUS[$status];
-            
+
             if ($invoice->isPaid()) {
                 $invoice->issuer_name = $response['payment'][0]['issuerName'];
                 $invoice->payment_method_name = $response['payment'][0]['paymentMethodName'];
@@ -38,6 +38,6 @@ class VerifyPaymentStatusAction
             $invoice->invoice_status = InvoiceStatus::CANCELED;
             $invoice->request_id = null;
             $invoice->save();
-        } 
+        }
     }
 }

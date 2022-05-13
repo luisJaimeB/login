@@ -13,10 +13,11 @@ use Tests\TestCase;
 
 class ProducttwoTest extends TestCase
 {
-    use RefreshDatabase, WithFaker;
+    use RefreshDatabase;
+    use WithFaker;
 
     /** @test */
-    public function authorized_user_can_access_to_admin_product_list ()
+    public function authorized_user_can_access_to_admin_product_list()
     {
         $this->seed([RoleSeeder::class, PermissionSeeder::class]);
 
@@ -41,7 +42,7 @@ class ProducttwoTest extends TestCase
     }
 
     /** @test */
-    public function authorized_user_can_update_a_product ()
+    public function authorized_user_can_update_a_product()
     {
         $this->seed([RoleSeeder::class, PermissionSeeder::class]);
 
@@ -72,5 +73,4 @@ class ProducttwoTest extends TestCase
             'description' => $data['description'],
         ]);
     }
-
 }

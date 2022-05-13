@@ -14,10 +14,11 @@ use Tests\TestCase;
 
 class ProductTest extends TestCase
 {
-    use RefreshDatabase, WithFaker;
+    use RefreshDatabase;
+    use WithFaker;
 
     /** @test */
-    public function authorized_user_can_access_to_admin_product_list ()
+    public function authorized_user_can_access_to_admin_product_list()
     {
         $this->withoutExceptionHandling();
         $this->seed([RoleSeeder::class, PermissionSeeder::class]);
@@ -43,7 +44,7 @@ class ProductTest extends TestCase
     }
 
     /** @test */
-    public function authorized_user_can_access_to_admin_product_edit ()
+    public function authorized_user_can_access_to_admin_product_edit()
     {
         $this->withoutExceptionHandling();
         $this->seed([RoleSeeder::class, PermissionSeeder::class]);
@@ -66,7 +67,7 @@ class ProductTest extends TestCase
     }
 
     /** @test */
-    public function authorized_user_can_update_a_product ()
+    public function authorized_user_can_update_a_product()
     {
         $this->withoutExceptionHandling();
         $this->seed([RoleSeeder::class, PermissionSeeder::class]);
@@ -99,9 +100,9 @@ class ProductTest extends TestCase
         ]);
     }
 
-     /** @test */
-     public function authorized_user_can_access_to_admin_product_show ()
-     {
+    /** @test */
+    public function authorized_user_can_access_to_admin_product_show()
+    {
         $this->withoutExceptionHandling();
         $this->seed([RoleSeeder::class, PermissionSeeder::class]);
 
@@ -121,5 +122,5 @@ class ProductTest extends TestCase
         $response->assertOk()
         ->assertViewIs('admin.products.show')
         ->assertViewHas('product', $product);
-     }
+    }
 }

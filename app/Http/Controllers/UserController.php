@@ -29,7 +29,7 @@ class UserController extends Controller
     }
 
 
-    public function store(UserCreateRequest $request):RedirectResponse
+    public function store(UserCreateRequest $request): RedirectResponse
     {
         $user = User::create($request->only('name', 'username', 'email') + [
             'password' => bcrypt($request->input('password'))
@@ -74,7 +74,7 @@ class UserController extends Controller
     }
 
 
-    public function destroy(User $user):RedirectResponse
+    public function destroy(User $user): RedirectResponse
     {
         if (auth()->user()->id == $user->id) {
             return redirect()->route('users.index');

@@ -46,9 +46,9 @@ class ListenWebcheckout extends Command
             ->get();
 
         foreach ($invoices as $invoice) {
-            VerifyPaymentStatusAction::execute($webCheckout, $invoice);    
+            VerifyPaymentStatusAction::execute($webCheckout, $invoice);
         }
-        
+
         return self::SUCCESS;
     }
 }

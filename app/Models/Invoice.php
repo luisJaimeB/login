@@ -24,7 +24,7 @@ class Invoice extends Model
         return $this->belongsToMany(Product::class)
             ->withPivot('quantity', 'price', 'subtotal');
     }
-    
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -42,15 +42,15 @@ class Invoice extends Model
             || in_array($this->attributes['invoice_status'], [InvoiceStatus::PENDING, InvoiceStatus::CANCELED]);
     }
 
-    public function isPaid(): bool  
-    {   
+    public function isPaid(): bool
+    {
         return $this->attributes['invoice_status'] === InvoiceStatus::PAID;
     }
 
     public function scopeWhereBetweenDate(Builder $query, string $startDate, string $endDate): Builder
     {
         return $query->whereBetween('created_at', [
-            Carbon::parse($startDate)->startOfDay(), 
+            Carbon::parse($startDate)->startOfDay(),
             Carbon::parse($endDate)->endOfDay(),
         ]);
     }

@@ -12,10 +12,10 @@ class PaymentRedirectionAction
     {
         $response = $webCheckout->buildData($invoice)
             ->createSession();
-        
+
         if (isset($response['requestId'])) {
             $invoice->update(['request_id'=> $response['requestId']]);
-            
+
             return redirect()->away($response['processUrl']);
         } else {
             Log::channel('payments')
@@ -24,5 +24,4 @@ class PaymentRedirectionAction
             return back()->with('error', 'Estamos teniendo problemas, regresa más tarde!!');
         }
     }
-
 }

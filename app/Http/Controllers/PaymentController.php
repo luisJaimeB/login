@@ -28,7 +28,7 @@ class PaymentController extends Controller
         UpdateUserAction::update($request->validated());
 
         $invoice = CreateInvoiceAction::execute();
-    
+
         return PaymentRedirectionAction::execute($webCheckout, $invoice);
     }
 
@@ -37,7 +37,7 @@ class PaymentController extends Controller
         $invoice = Invoice::where('reference', $reference)
             ->whereIn('invoice_status', [PaymentStatus::PENDING, PaymentStatus::REJECTED])
             ->firstOrFail();
-        
+
         return PaymentRedirectionAction::execute($webCheckout, $invoice);
     }
 
@@ -47,8 +47,8 @@ class PaymentController extends Controller
             ->whereNotNull('request_id')
             ->where('invoice_status', PaymentStatus::PENDING)
             ->firstOrFail();
-    
-            VerifyPaymentStatusAction::execute($webCheckout, $invoice);
+
+        VerifyPaymentStatusAction::execute($webCheckout, $invoice);
 
         return redirect()->route('invoices.show', $invoice);
     }

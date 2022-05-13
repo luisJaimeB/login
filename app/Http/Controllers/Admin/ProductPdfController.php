@@ -21,12 +21,11 @@ class ProductPdfController extends Controller
         $products = Product::whereBetweenDate($request->query('start_date'), $request->query('end_date'))->get();
 
         $view = view('admin.reports.products.productsReport', compact('products'))->render();
-        
+
         $pdf = SnappyPdf::loadHTML($view)->setOrientation('landscape');
-        
+
         return $pdf->inline();
 
         /* return view('admin.reports.report', compact('invoices'))->render(); */
-        
     }
 }

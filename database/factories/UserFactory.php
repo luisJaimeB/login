@@ -38,9 +38,9 @@ class UserFactory extends Factory
         });
     }
 
-     /**
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
-     */
+    /**
+    * @return \Illuminate\Database\Eloquent\Factories\Factory
+    */
     public function enabled()
     {
         return $this->state(function (array $attributes) {

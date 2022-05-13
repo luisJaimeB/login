@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateImportsTable extends Migration
 {
-    
     public function up(): void
     {
         Schema::create('imports', function (Blueprint $table) {
