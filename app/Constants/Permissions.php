@@ -59,7 +59,7 @@ class Permissions
 
     }
 
-    /* public static function permissionToAdmin(): array
+    public static function permissionToAdmin(): array
     {
         return [
             self::ROLES_INDEX,
@@ -82,7 +82,7 @@ class Permissions
             self::ADMIN_PRODUCTS_DESTROY,
             self::ADMIN_INVOICES_INDEX,
         ];
-    } */
+    }
 
     public static function permissionToUser(): array
     {
