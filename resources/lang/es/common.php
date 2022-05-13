@@ -19,12 +19,17 @@ return [
     'subtotal' => 'Subtotal',
     'total' => 'Total',
     'import' => 'Importar',
+    'imports' => 'Importes',
     'date' => 'Fecha',
     'file' => 'Archivo',
     'export' => 'Exportar',
     'reports' => 'Reportes',
     'createReport' => 'Crear reporte',
     'print' => 'Imprimir',
+    'row' => 'Row',
+    'attribute' => 'Attribute',
+    'errors' => 'Errors',
+    'value' => 'Value',
 
     'messages' => [
         'buying' => 'Comprando en :app'
