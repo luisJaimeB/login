@@ -103,8 +103,8 @@ class ProductController extends Controller
 
         if ($image and Storage::disk('public')->exists($image->path)) {
             Storage::disk('public')->delete($image->path);
+            $image->delete();
         }
-        $image->delete();
         $product->delete();
 
         return back()->with('success', 'Producto eliminado correctamente');
