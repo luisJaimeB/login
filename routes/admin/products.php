@@ -63,6 +63,10 @@ Route::get('imports', [ImportController::class, 'index'])
 Route::get('export/products', [ProductExportController::class, 'export'])
     ->name('export.products');
 
+Route::get('export/top-selling', [ProductExportController::class, 'top'])
+    ->name('export.top-selling')
+    ->middleware('auth', 'role:Admin', 'verified');
+
 Route::get('report/products/create', [ProductPdfController::class, 'create'])
     ->name('report.products.create');
 
