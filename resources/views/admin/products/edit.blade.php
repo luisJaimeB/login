@@ -66,7 +66,7 @@
                                 <div class="row">
                                     <label for="image" class="col-sm-2 col-form-label">@lang('products.fields.image')</label>
                                     <div class="col-sm-7">
-                                        <input type="file" class="form-control" name="image" value="{{ old('image', $product->image->path) }}">
+                                        <input type="file" class="form-control" name="image" value="{{ old('image', optional($product->image)->path) }}">
                                         @if ($errors->has('image'))
                                             <span class="error text-danger" for="input-image">{{ $errors->first('image') }}</span>
                                         @endif
