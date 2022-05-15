@@ -42,7 +42,8 @@ class Product extends Model
 
     public function invoices(): BelongsToMany
     {
-        return $this->belongsToMany(Invoice::class);
+        return $this->belongsToMany(Invoice::class)
+            ->withPivot('quantity', 'price', 'subtotal');
     }
 
     public function getPreviewDescriptionAttribute(): string
