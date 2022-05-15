@@ -17,7 +17,7 @@ class WelcomeController extends Controller
             ->with(['category', 'image'])
             ->latest()
             ->paginate(config('settings.pagination'));
-        
+
         return view('welcome', compact('products'));
     }
 }

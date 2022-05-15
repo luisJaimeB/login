@@ -179,7 +179,6 @@ return [
         App\Providers\FortifyServiceProvider::class,
         App\Providers\ComposerServiceProvider::class,
         Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
-        //App\Providers\ShoppingCartProvider::class,
     ],
 
     /*
@@ -235,6 +234,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
+
 
     ],
 

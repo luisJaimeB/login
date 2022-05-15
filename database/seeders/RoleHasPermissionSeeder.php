@@ -17,8 +17,15 @@ class RoleHasPermissionSeeder extends Seeder
     public function run()
     {
         // Admin
-        $adminPermissions = Permission::all();
-        Role::findOrFail(1)->permissions()->sync($adminPermissions->pluck('id'));
+        /* $adminPermissions = Permission::all();
+        Role::findOrFail(1)->permissions()->sync($adminPermissions->pluck('id')); */
+
+        $roleAdmin = Role::where('name', 'Admin')->first();
+
+        foreach (Permissions::permissionToAdmin() as $permission) {
+            $permission = Permission::where('name', $permission)->first();
+            $roleAdmin->givePermissionTo($permission);
+        }
 
         /* // User
         $userPermissions = $adminPermissions->filter(function($permission) {

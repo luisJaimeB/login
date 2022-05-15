@@ -29,7 +29,7 @@ class PermissionController extends Controller
         return view('permissions.create');
     }
 
-    
+
     public function store(PermissionCreateRequest $request): RedirectResponse
     {
         Permission::create($request->only('name'));

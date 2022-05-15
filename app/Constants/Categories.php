@@ -2,8 +2,7 @@
 
 namespace App\Constants;
 
-
-class Categories 
+class Categories
 {
     public const SIMULACION = 'simulacion';
     public const MUNDO_ABIERTO = 'mundo abierto';
@@ -25,7 +24,5 @@ class Categories
             self::GUERRA,
             self::MOBA,
         ];
-
     }
-
 };

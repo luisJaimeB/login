@@ -7,7 +7,7 @@ use App\Constants\PaymentStatus;
 use App\Models\Invoice;
 use App\Services\WebCheckoutService;
 
-class VerifyPaymentStatus
+class VerifyPaymentStatusAction
 {
     public static function execute(WebCheckoutService $webCheckout, Invoice $invoice): void
     {
@@ -18,9 +18,17 @@ class VerifyPaymentStatus
 
         if ($status && PaymentStatus::completed($status)) {
             $invoice->invoice_status = InvoiceStatus::STATUS[$status];
-            $invoice->issuer_name = $response['payment'][0]['issuerName'];
-            $invoice->payment_method_name = $response['payment'][0]['paymentMethodName'];
-            $invoice->date = $response['status']['date'];
+
+            if ($invoice->isPaid()) {
+                $invoice->issuer_name = $response['payment'][0]['issuerName'];
+                $invoice->payment_method_name = $response['payment'][0]['paymentMethodName'];
+                $invoice->date = $response['status']['date'];
+                $invoice->load('products');
+                foreach ($invoice->products as $product) {
+                    $product->quantity = $product->quantity - $product->pivot->quantity;
+                    $product->save();
+                }
+            }
             $invoice->save();
 
             return;

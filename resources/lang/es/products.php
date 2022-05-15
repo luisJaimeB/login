@@ -2,7 +2,7 @@
 
 return [
 
-    'productsCreate' => 'Products create',
+    'productsCreate' => 'Crear Producto',
 
     'titles' => [
         'products' => 'Productos',
@@ -14,6 +14,8 @@ return [
         'basicDetails' => 'Detalles básicos',
         'orderDetails' => 'Detalles del pedido',
         'placeOrder' => 'Realizar el pedido',
+        'prod_loaded' => 'Productos cargados en la plataforma',
+        'prod_import' => 'Cargue archivo de productos',
     ],
 
     'messages' => [

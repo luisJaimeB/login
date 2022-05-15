@@ -9,7 +9,7 @@
                             <div class="card">
                                 <div class="card-header card-header-primary">
                                     <div class="card-title"><strong>@lang('products.titles.products')</strong></div>
-                                    <div class="card-category">@lang('products.titles.stock')</div>
+                                    <div class="card-category">@lang('products.titles.prod_loaded')</div>
                                 </div>
                                 <div class="card-body bg-light">
                                     @if (session('success'))
@@ -21,9 +21,16 @@
                                         </div>    
                                     @endif
                                     <div class="row">
-                                        <div class="col-12 text-right">
+                                        <div class="col-md-7">
+                                            <a href="{{ route('admin.imports.index') }}" class="btn btn-sm btn-success">@lang('common.imports')</a>
+                                            <a href="{{ route('admin.export.top-selling') }}" class="btn btn-sm btn-success">Ventas</a>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <a href="{{ route('admin.report.products.create') }}" class="btn btn-sm btn-info">@lang('common.reports') <i class="fas fa-file-pdf"></i></a>
+                                            <a href="{{ route('admin.export.products') }}" class="btn btn-sm btn-warning">@lang('common.export') <i class="fas fa-file-export"></i></a>
+                                            <a href="{{ route('admin.import.products.create') }}" class="btn btn-sm btn-success">@lang('common.import') <i class="fas fa-file-import"></i></a>
                                             @can('admin.products.create')
-                                            <a href="{{ route('admin.products.create') }}" class="btn btn-sm btn-primary">@lang('products.productsCreate')</a>
+                                            <a href="{{ route('admin.products.create') }}" class="btn btn-sm btn-primary">@lang('products.productsCreate') <i class="fas fa-plus"></i></a>
                                             @endcan
                                         </div>
                                     </div>
@@ -49,7 +56,12 @@
                                                         <td><strong>&#36; </strong>{{ $product->price}}</td>
                                                         <td>{{ $product->category->name}}</td>
                                                         <td>{{ $product->quantity}}</td>
-                                                        <td class="w-25"><img class="rounded mx-auto w-50" src="{{ $product->image->path_url }}" alt="Card image cap" width="304"></td>
+                                                        @empty($product->image)
+                                                            <td class="w-25"><img class="rounded mx-auto w-50" src="{{ asset('img/default.jpg') }}" alt="Card image cap" width="304"></td>    
+                                                            @else
+                                                                <td class="w-25"><img class="rounded mx-auto w-50" src="{{ $product->image->path_url }}" alt="Card image cap" width="304"></td>        
+                                                        @endempty
+                                                        
                                                             @if ($product->status == 1)
                                                                 <td>
                                                                     <a href="{{ route('admin.products.change.status', $product->id) }}" class="badge badge-info">

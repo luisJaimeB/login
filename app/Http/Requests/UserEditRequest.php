@@ -6,13 +6,12 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UserEditRequest extends FormRequest
 {
-    
     public function authorize(): bool
     {
         return true;
     }
 
-    
+
     public function rules(): array
     {
         $user = $this->route('user');

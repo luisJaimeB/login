@@ -6,13 +6,12 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class RoleEditRequest extends FormRequest
 {
-    
     public function authorize(): bool
     {
         return true;
     }
 
-    
+
     public function rules(): array
     {
         $role = $this->route('role');

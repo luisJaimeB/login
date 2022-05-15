@@ -10,9 +10,12 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable implements MustVerifyEmail 
+class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles;
+    use HasApiTokens;
+    use HasFactory;
+    use Notifiable;
+    use HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -50,8 +53,8 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(CardContact::class);
     }
-    
-    public function sales():HasMany
+
+    public function sales(): HasMany
     {
         return $this->hasMany(Invoice::class, 'user_id');
     }

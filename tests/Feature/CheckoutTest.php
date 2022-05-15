@@ -14,10 +14,11 @@ use Tests\TestCase;
 
 class CheckoutTest extends TestCase
 {
-    use RefreshDatabase, WithFaker;
+    use RefreshDatabase;
+    use WithFaker;
 
     /** @test */
-    public function authorized_user_can_access_to_checkout ()
+    public function authorized_user_can_access_to_checkout()
     {
         $this->seed([RoleSeeder::class]);
 

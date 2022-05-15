@@ -14,11 +14,11 @@ class CreateInvoiceAction
         return DB::transaction(function () {
             $data = self::makeData();
             $invoice = self::createInvoice();
-    
+
             $invoice->products()->attach($data);
 
             Cart::destroy();
-            
+
             return $invoice;
         });
     }
@@ -55,7 +55,7 @@ class CreateInvoiceAction
         do {
             $reference = null;
             $temporaryReference = date('ymd') . strtoupper(Str::random(6));
-            
+
             if (!Invoice::where('reference', $temporaryReference)->exists()) {
                 $reference = $temporaryReference;
             }

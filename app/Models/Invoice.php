@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\Constants\InvoiceStatus;
 use App\Constants\PaymentStatus;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -22,7 +24,7 @@ class Invoice extends Model
         return $this->belongsToMany(Product::class)
             ->withPivot('quantity', 'price', 'subtotal');
     }
-    
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -38,5 +40,23 @@ class Invoice extends Model
     {
         return empty($this->attributes['request_id'])
             || in_array($this->attributes['invoice_status'], [InvoiceStatus::PENDING, InvoiceStatus::CANCELED]);
+    }
+
+    public function isPaid(): bool
+    {
+        return $this->attributes['invoice_status'] === InvoiceStatus::PAID;
+    }
+
+    public function scopeWhereBetweenDate(Builder $query, string $startDate, string $endDate): Builder
+    {
+        return $query->whereBetween('created_at', [
+            Carbon::parse($startDate)->startOfDay(),
+            Carbon::parse($endDate)->endOfDay(),
+        ]);
+    }
+
+    public function scopeHisInvoices(Builder $query, string $id): Builder
+    {
+        return $query->where('user_id', $id);
     }
 }

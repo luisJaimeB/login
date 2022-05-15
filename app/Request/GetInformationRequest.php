@@ -15,7 +15,7 @@ class GetInformationRequest implements WebcheckoutRequestContract
         } else {
             $nonce = mt_rand();
         }
-        
+
         return $nonce;
     }
 
