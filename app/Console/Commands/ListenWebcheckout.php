@@ -45,9 +45,13 @@ class ListenWebcheckout extends Command
             ->where('invoice_status', InvoiceStatus::PENDING)
             ->get();
 
+        $this->info('invoices to verify: ' . $invoices->count());
+
         foreach ($invoices as $invoice) {
             VerifyPaymentStatusAction::execute($webCheckout, $invoice);
         }
+
+        $this->info('Success');
 
         return self::SUCCESS;
     }
