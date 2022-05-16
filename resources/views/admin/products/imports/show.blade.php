@@ -53,28 +53,23 @@
                                             <table class="table table-striped table-hover">
                                                 <thead>
                                                     <tr>
-                                                        <th scope="col">#</th>
                                                         <th scope="col">@lang('common.row')</th>
                                                         <th scope="col">@lang('common.attribute')</th>
                                                         <th scope="col">@lang('common.errors')</th>
-                                                        <th scope="col">@lang('common.value')</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {{-- @dd($import->errors) --}}
-                                                   {{--  @forelse ($import->errors as $error)
-                                                        <tr class="text-center">
-                                                            <th scope="row">{{ $loop->iteration }}</th>
-                                                            <td>{{ $error->row }}</td>
-                                                            <td></td>
-                                                            <td></td>
-                                                            <td></td>
+                                                   @forelse ($import->errors as $key => $errors)
+                                                        <tr>
+                                                            <th scope="row">{{ explode('.', $key)[0] + 1 }}</th>
+                                                            <th>{{ explode('.', $key)[1] }}</th>
+                                                            <td>{{ implode(', ', $errors) }}</td>
                                                         </tr>
                                                     @empty
                                                         <tr>
                                                             <td colspan="6">@lang('imports.messages.empty')</td>
                                                         </tr>
-                                                    @endforelse --}}
+                                                    @endforelse
                                                 </tbody>
                                               </table>
                                         </div>

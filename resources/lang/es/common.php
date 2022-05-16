@@ -26,10 +26,12 @@ return [
     'reports' => 'Reportes',
     'createReport' => 'Crear reporte',
     'print' => 'Imprimir',
-    'row' => 'Row',
-    'attribute' => 'Attribute',
-    'errors' => 'Errors',
-    'value' => 'Value',
+    'row' => 'Fila',
+    'attribute' => 'Attributo',
+    'errors' => 'Errores',
+    'value' => 'Valor',
+    'created_at' => 'Fecha de creación',
+    'updated_at' => 'Fecha de actualización',
 
     'messages' => [
         'buying' => 'Comprando en :app'
