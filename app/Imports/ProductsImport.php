@@ -5,52 +5,59 @@ namespace App\Imports;
 use App\Constants\ImportStatus;
 use App\Models\Import;
 use App\Models\Product;
-use App\Models\Category;
-use App\Rules\ProductRules;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Validation\Rule;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Concerns\Importable;
-use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Validators\Failure;
 use Maatwebsite\Excel\Events\BeforeImport;
 use Maatwebsite\Excel\Concerns\SkipsOnFailure;
+use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
-use Maatwebsite\Excel\Concerns\WithValidation;
 use Maatwebsite\Excel\Concerns\WithBatchInserts;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterImport;
 use Maatwebsite\Excel\Events\ImportFailed;
+use PHPUnit\Util\InvalidDataSetException;
 
-class ProductsImport implements ToModel, WithHeadingRow, WithBatchInserts, WithChunkReading, WithValidation, SkipsOnFailure, ShouldQueue, WithEvents
+class ProductsImport implements ToCollection, WithHeadingRow, WithBatchInserts, WithChunkReading, SkipsOnFailure, ShouldQueue, WithEvents
 {
     use Importable;
 
-    private Collection $categories;
+    private array $errors = [];
     private Import $import;
 
     public function __construct(Import $import)
     {
         $this->import = $import;
-        $this->categories = Category::pluck('id', 'name');
     }
-    /**
-    * @param array $row
-    *
-    * @return \Illuminate\Database\Eloquent\Model|null
-    */
-    public function model(array $row)
+
+    public function collection(Collection $rows)
     {
-        return new Product([
-            'name' => $row['name'],
-            'description' => $row['description'],
-            'price' => $row['price'],
-            'category_id' => $this->categories[$row['category']],
-            'quantity' => $row['quantity'],
-            'status' => $row['status'],
-        ]);
+         $validator = Validator::make($rows->toArray(), [
+            '*.id' => ['nullable', 'exists:products,id'],
+            '*.name' => ['required', 'max:50'],
+            '*.description' => ['required','min:50','max:340'],
+            '*.price' => ['required'],
+            '*.quantity' => ['required'],
+            '*.category_id' => ['required', 'int', 'exists:categories,id'],
+            '*.status' => ['required', 'int', 'in:0,1'],
+         ]);
+
+         if ($validator->fails()) {
+            throw new InvalidDataSetException($validator->errors()->toJson());
+         }
+
+        foreach ($rows as $row) {
+            if (isset($row['id'])) {
+                Product::where('id', $row['id'])->update($row->except(['id'])->toArray());
+            } else {
+                Product::create($row->toArray());
+            }
+            
+        }
     }
 
     public function batchSize(): int
@@ -63,14 +70,10 @@ class ProductsImport implements ToModel, WithHeadingRow, WithBatchInserts, WithC
         return 1000;
     }
 
-    public function rules(): array
-    {
-        return ProductRules::toArray();
-    }
-
     public function onFailure(Failure ...$failures)
     {
         $errors = collect();
+        info('onFailure');
 
         foreach ($failures as $failure) {
             $errors->push([
@@ -102,7 +105,10 @@ class ProductsImport implements ToModel, WithHeadingRow, WithBatchInserts, WithC
                 Log::channel('imports')->info('complete');
             },
             ImportFailed::class => function (ImportFailed $event) {
-                $this->import->update(['import_status' => ImportStatus::FAILED]);
+                $this->import->update([
+                    'errors' => $event->getException()->getMessage(),
+                    'import_status' => ImportStatus::FAILED
+                ]);
                 Log::channel('imports')->info('fail');
             }
 
