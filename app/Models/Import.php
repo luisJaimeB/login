@@ -26,9 +26,8 @@ class Import extends Model
         return $this->attributes['import_status'] === ImportStatus::COMPLETERRORS;
     }
 
-    public function getErrorsAttribute(): object
+    public function getErrorsAttribute(): array
     {
-        /* dd(json_decode(json_encode($this->attributes['errors']))); */
-        return json_decode($this->attributes['errors']);
+        return json_decode(stripcslashes(trim($this->attributes['errors'],'"')), true);
     }
 }

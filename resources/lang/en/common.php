@@ -26,6 +26,12 @@ return [
     'reports' => 'Reports',
     'createReport' => 'Create report',
     'print' => 'Print',
+    'row' => 'Row',
+    'attribute' => 'Attribute',
+    'errors' => 'Errors',
+    'value' => 'Value',
+    'created_at' => 'Created at',
+    'updated_at' => 'Updated at',
 
     'messages' => [
         'buying' => 'Shopping on :app'
